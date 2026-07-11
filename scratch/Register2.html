@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Merchant Registration - KYC Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002108",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#00531e",
+                        "surface-variant": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#e7ddff",
+                        "secondary-fixed-dim": "#e9c400",
+                        "tertiary-container": "#00742d",
+                        "tertiary-fixed": "#69ff87",
+                        "on-secondary-fixed": "#221b00",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6e5c00",
+                        "secondary-container": "#fcd400",
+                        "surface-container-high": "#ebe7e7",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e7deff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#4d00d2",
+                        "tertiary-fixed-dim": "#3ce36a",
+                        "on-tertiary-container": "#5eff82",
+                        "secondary": "#705d00",
+                        "tertiary": "#005920",
+                        "inverse-primary": "#ccbdff",
+                        "on-secondary-fixed-variant": "#544600",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f8",
+                        "outline-variant": "#cac3d9",
+                        "outline": "#7a7488",
+                        "on-surface-variant": "#494456",
+                        "primary": "#5301e0",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed": "#1f0060",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface": "#fcf9f8",
+                        "secondary-fixed": "#ffe16d",
+                        "surface-tint": "#662ff2",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container": "#f0edec",
+                        "primary-fixed-dim": "#ccbdff",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-surface": "#313030",
+                        "primary-container": "#6c38f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid theme('colors.outline-variant');
+            box-shadow: 0px 4px 20px rgba(108, 56, 248, 0.05);
+        }
+        .upload-zone {
+            border: 2px dashed theme('colors.outline-variant');
+            transition: all 0.2s ease-in-out;
+        }
+        .upload-zone:hover {
+            border-color: theme('colors.primary');
+            background-color: theme('colors.surface-container-low');
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<main class="w-full max-w-3xl glass-panel rounded-xl p-8 shadow-[0_8px_30px_rgba(108,56,248,0.12)]">
+<!-- Header -->
+<div class="text-center mb-8">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2 hidden md:block">MoneyMate Merchant Setup</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2 md:hidden">MoneyMate Merchant</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Secure KYC Verification</p>
+</div>
+<!-- Progress Indicator -->
+<div class="mb-10">
+<div class="flex items-center justify-between relative">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-surface-variant -z-10 rounded-full"></div>
+<!-- Step 1 (Completed) -->
+<div class="flex flex-col items-center gap-2 bg-background z-10 px-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Basic Info</span>
+</div>
+<!-- Step 2 (Active) -->
+<div class="flex flex-col items-center gap-2 bg-background z-10 px-2">
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-primary-container text-primary font-bold flex items-center justify-center">2</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Verification</span>
+</div>
+<!-- Step 3 (Pending) -->
+<div class="flex flex-col items-center gap-2 bg-background z-10 px-2">
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant bg-surface text-outline font-bold flex items-center justify-center">3</div>
+<span class="font-label-sm text-label-sm text-outline">Business Details</span>
+</div>
+<!-- Step 4 (Pending) -->
+<div class="flex flex-col items-center gap-2 bg-background z-10 px-2">
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant bg-surface text-outline font-bold flex items-center justify-center">4</div>
+<span class="font-label-sm text-label-sm text-outline">Confirm</span>
+</div>
+</div>
+<!-- Progress Bar Fill -->
+<div class="relative mt-[-24px] h-1 w-1/3 bg-primary rounded-full z-0"></div>
+</div>
+<form class="space-y-8">
+<!-- Documents Section -->
+<section class="space-y-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Identity &amp; Business Documents</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Please upload clear, legible copies of your official documents.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Government ID Upload -->
+<div class="upload-zone rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-surface">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-4 shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">badge</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface mb-1">Government Issued ID</h3>
+<p class="font-body-sm text-body-sm text-outline mb-4">Passport, Driver's License, or National ID</p>
+<button class="px-4 py-2 bg-transparent border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors" type="button">Select File</button>
+</div>
+<!-- Business Registration Upload -->
+<div class="upload-zone rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-surface">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-4 shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">description</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface mb-1">Business Registration</h3>
+<p class="font-body-sm text-body-sm text-outline mb-4">Certificate of Incorporation or equivalent</p>
+<button class="px-4 py-2 bg-transparent border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors" type="button">Select File</button>
+</div>
+</div>
+<!-- Selfie Verification -->
+<div class="upload-zone rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-surface md:col-span-2">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-4 shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">photo_camera</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface mb-1">Selfie Verification</h3>
+<p class="font-body-sm text-body-sm text-outline mb-4">Take a clear photo of your face holding your Government ID.</p>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center gap-2 shadow-[0_4px_20px_rgba(108,56,248,0.15)]" type="button">
+<span class="material-symbols-outlined text-sm">camera</span> Take Photo
+                    </button>
+</div>
+</section>
+<hr class="border-outline-variant/30"/>
+<!-- Bank Details Section -->
+<section class="space-y-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Bank Account Details</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Where should we route your settlements?</p>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="account-name">Account Holder Name</label>
+<input class="w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container outline-none transition-all" id="account-name" placeholder="As it appears on your bank statement" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="bank-name">Bank Name</label>
+<input class="w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container outline-none transition-all" id="bank-name" placeholder="e.g. Chase, Bank of America" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="account-number">Account Number</label>
+<input class="w-full px-4 py-3 border border-outline-variant rounded-lg bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container outline-none transition-all" id="account-number" placeholder="Enter account number" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Note -->
+<div class="flex items-start gap-3 p-4 bg-surface-container-low rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-tertiary-container mt-0.5">lock</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your data is encrypted and securely stored. We only use this information to verify your identity and comply with financial regulations.</p>
+</div>
+<!-- Actions -->
+<div class="flex flex-col-reverse sm:flex-row justify-between items-center gap-4 pt-4">
+<button class="w-full sm:w-auto px-6 py-3 bg-transparent text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors" type="button">Back</button>
+<button class="w-full sm:w-auto px-8 py-3 bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-[0_4px_20px_rgba(108,56,248,0.15)] hover:opacity-90 transition-opacity flex items-center justify-center gap-2" type="submit">
+                    Continue to Step 3
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</form>
+</main>
+</body></html>

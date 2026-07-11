@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MoneyMate Merchant Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002108",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#00531e",
+                        "surface-variant": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#e7ddff",
+                        "secondary-fixed-dim": "#e9c400",
+                        "tertiary-container": "#00742d",
+                        "tertiary-fixed": "#69ff87",
+                        "on-secondary-fixed": "#221b00",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6e5c00",
+                        "secondary-container": "#fcd400",
+                        "surface-container-high": "#ebe7e7",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e7deff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#4d00d2",
+                        "tertiary-fixed-dim": "#3ce36a",
+                        "on-tertiary-container": "#5eff82",
+                        "secondary": "#705d00",
+                        "tertiary": "#005920",
+                        "inverse-primary": "#ccbdff",
+                        "on-secondary-fixed-variant": "#544600",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f8",
+                        "outline-variant": "#cac3d9",
+                        "outline": "#7a7488",
+                        "on-surface-variant": "#494456",
+                        "primary": "#5301e0",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed": "#1f0060",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface": "#fcf9f8",
+                        "secondary-fixed": "#ffe16d",
+                        "surface-tint": "#662ff2",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container": "#f0edec",
+                        "primary-fixed-dim": "#ccbdff",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-surface": "#313030",
+                        "primary-container": "#6c38f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0px 4px 20px rgba(108, 56, 248, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar (Desktop) -->
+<nav class="h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col bg-surface-container-low shadow-md z-40 transition-colors duration-200 ease-in-out py-6">
+<div class="px-6 mb-8 flex flex-col items-start gap-2">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A clean, modern geometric logo for a fintech merchant on a light gray background, conveying trust and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVqP3a9j873OMX6RSHiZcCoFbWqwx7CFdQH_frKYiUILK7cR22Nofevt0jIn7EntPoBUUFujwtZ95tDepYWjA5SnYub2vyhl0sqtSXElOmkCPgzbtCzoQdMD5jQBuEtNL6cJncxdbYdE9l_7hFekaRvnt_WDG2WC4ZQQcCfi3LALJ91LkVZUKX3JehEF9hHXA70uKhw1FGaon1f5P8Q3iDOIWDGnY-_bNbv_QTroAtC1EFRB3X0JWd"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary">MoneyMate Merchant</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Verified Partner</p>
+</div>
+</div>
+<div class="flex flex-col h-full gap-2 px-2 flex-1">
+<!-- Active: Dashboard -->
+<a class="bg-primary-container text-on-primary-container rounded-xl flex items-center gap-3 py-3 px-4 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span class="font-label-md text-label-md">Rewards</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">local_offer</span>
+<span class="font-label-md text-label-md">Offers</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">qr_code_2</span>
+<span class="font-label-md text-label-md">QR Manager</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">card_membership</span>
+<span class="font-label-md text-label-md">Subscriptions</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">how_to_reg</span>
+<span class="font-label-md text-label-md">KYC Status</span>
+</a>
+</div>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-on-primary rounded-lg py-3 font-label-md text-label-md shadow-sm hover:shadow-md transition-shadow">
+                New Campaign
+            </button>
+</div>
+<div class="flex flex-col gap-2 px-2 mt-4 pt-4 border-t border-outline-variant/30">
+<a class="text-on-surface-variant flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 h-full overflow-y-auto relative pb-24 md:pb-0">
+<!-- TopAppBar (Mobile/Responsive Header) -->
+<header class="docked full-width top-0 sticky z-50 bg-surface/80 backdrop-blur-xl shadow-sm border-b border-outline-variant/30 md:hidden">
+<div class="flex justify-between items-center px-gutter py-4 w-full">
+<span class="font-display-lg text-headline-md font-bold text-primary">MoneyMate</span>
+<div class="flex items-center gap-4">
+<button class="text-primary"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-primary"><span class="material-symbols-outlined">verified_user</span></button>
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small circular avatar placeholder image showing a subtle, professional grey silhouette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjLoI0hHygLHHPrXP3DObiecpXRgtu46Cb-Ua0VJtolov94fxaw9srNd23HD_oaxEzjYLR1-WNmYsQ42JMu-RF1MmXnUwNI1BT-0HPswN7RigCBw-WTJZv-a8PyhNg5tEeJj6iqt-e2QWJhYNERTvNPa1gYbXtjKtcQEmDfnUak6qqddSS7aOMdYDvWP7K-vD3g_-r2MseQOFdIJYggcbvu1I_EU5VRLX6KKfDnr6DBGWbTppjgrja"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-gutter md:p-margin-desktop max-w-7xl mx-auto space-y-lg">
+<!-- Greeting & Status -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Overview</h2>
+<p class="text-on-surface-variant mt-1">Welcome back, check your store's performance.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-tertiary-container/10 text-tertiary px-3 py-1 rounded-full flex items-center gap-1 border border-tertiary/20">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-sm text-label-sm">KYC Verified</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md md:gap-lg">
+<!-- Rewards -->
+<div class="glass-card rounded-xl p-md flex flex-col justify-between border-l-4 border-l-primary">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface-variant">Total Rewards Issued</p>
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">workspace_premium</span>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-headline-md text-headline-md text-on-background">1,245</h3>
+<p class="font-body-sm text-body-sm text-tertiary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> +12% this week
+                        </p>
+</div>
+</div>
+<!-- Offers -->
+<div class="glass-card rounded-xl p-md flex flex-col justify-between border-l-4 border-l-secondary-container">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface-variant">Active Offers</p>
+<div class="w-8 h-8 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">local_offer</span>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-headline-md text-headline-md text-on-background">8</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">3 ending soon</p>
+</div>
+</div>
+<!-- QR Scans -->
+<div class="glass-card rounded-xl p-md flex flex-col justify-between border-l-4 border-l-primary">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface-variant">QR Scans (Today)</p>
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-headline-md text-headline-md text-on-background">156</h3>
+<p class="font-body-sm text-body-sm text-tertiary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> +5% vs yesterday
+                        </p>
+</div>
+</div>
+<!-- Plan Status -->
+<div class="glass-card rounded-xl p-md flex flex-col justify-between bg-surface-variant/30">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface-variant">Current Plan</p>
+</div>
+<div class="mt-4">
+<div class="inline-block bg-surface-dim text-on-surface px-3 py-1 rounded-full font-label-sm text-label-sm mb-2">
+                            Free Tier
+                        </div>
+<a class="block text-primary font-label-sm text-label-sm hover:underline" href="#">Upgrade for analytics →</a>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Main Graph Section -->
+<div class="lg:col-span-2 glass-card rounded-xl p-lg flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background">Rewards Performance</h3>
+<select class="bg-surface-container rounded-lg border-none text-body-sm p-2 text-on-surface-variant outline-none focus:ring-2 focus:ring-primary/50">
+<option>Last 30 Days</option>
+<option>This Week</option>
+</select>
+</div>
+<div class="flex-1 flex items-end justify-between gap-2 h-48 border-b border-outline-variant/30 pb-2 relative">
+<!-- Simple CSS Bar Chart -->
+<div class="w-full bg-primary/20 rounded-t-sm h-[40%] hover:bg-primary/40 transition-colors relative group"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[60%] hover:bg-primary/40 transition-colors relative group"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[30%] hover:bg-primary/40 transition-colors relative group"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[80%] hover:bg-primary/40 transition-colors relative group"></div>
+<div class="w-full bg-primary rounded-t-sm h-[95%] shadow-[0_0_10px_rgba(108,56,248,0.4)] relative group"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[50%] hover:bg-primary/40 transition-colors relative group"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[70%] hover:bg-primary/40 transition-colors relative group"></div>
+</div>
+<div class="flex justify-between mt-2 text-on-surface-variant font-label-sm text-label-sm">
+<span>Week 1</span>
+<span>Week 2</span>
+<span>Week 3</span>
+<span>Week 4</span>
+</div>
+</div>
+<!-- Side Panel: Actions & Activity -->
+<div class="flex flex-col gap-lg">
+<!-- Quick Actions -->
+<div class="glass-card rounded-xl p-md">
+<h3 class="font-headline-md text-headline-md text-on-background mb-4">Quick Actions</h3>
+<div class="flex flex-col gap-3">
+<button class="w-full flex items-center justify-center gap-2 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 rounded-lg py-3 transition-colors">
+<span class="material-symbols-outlined">qr_code</span>
+<span class="font-label-md text-label-md">View Store QR</span>
+</button>
+<button class="w-full flex items-center justify-between bg-surface-container text-on-surface-variant rounded-lg py-3 px-4 opacity-75 cursor-not-allowed">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md">Post New Offer</span>
+</div>
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</button>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="glass-card rounded-xl p-md flex-1">
+<h3 class="font-headline-md text-headline-md text-on-background mb-4">Recent Activity</h3>
+<div class="flex flex-col gap-4">
+<!-- Activity Item -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">redeem</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-background">Reward Redeemed</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">User: ****4920</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2m ago</span>
+</div>
+<!-- Activity Item -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-background">Store QR Scanned</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">New visitor</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">15m ago</span>
+</div>
+<!-- Activity Item -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">local_offer</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-background">Offer Expired</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">"Summer Special"</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1h ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface/90 backdrop-blur-xl md:hidden rounded-t-xl shadow-[0_-4px_20px_rgba(108,56,248,0.1)] border-t border-outline-variant/20">
+<!-- Active: Home (Mapping Dashboard to Home intent for mobile nav) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform rounded-lg p-1" href="#">
+<span class="material-symbols-outlined text-xl">analytics</span>
+<span class="font-label-sm text-label-sm mt-1">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform rounded-lg p-1" href="#">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-1">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform rounded-lg p-1" href="#">
+<span class="material-symbols-outlined text-xl">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

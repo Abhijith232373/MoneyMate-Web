@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My QR Code - MoneyMate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002108",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#00531e",
+                        "surface-variant": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#e7ddff",
+                        "secondary-fixed-dim": "#e9c400",
+                        "tertiary-container": "#00742d",
+                        "tertiary-fixed": "#69ff87",
+                        "on-secondary-fixed": "#221b00",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6e5c00",
+                        "secondary-container": "#fcd400",
+                        "surface-container-high": "#ebe7e7",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e7deff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#4d00d2",
+                        "tertiary-fixed-dim": "#3ce36a",
+                        "on-tertiary-container": "#5eff82",
+                        "secondary": "#705d00",
+                        "tertiary": "#005920",
+                        "inverse-primary": "#ccbdff",
+                        "on-secondary-fixed-variant": "#544600",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f8",
+                        "outline-variant": "#cac3d9",
+                        "outline": "#7a7488",
+                        "on-surface-variant": "#494456",
+                        "primary": "#5301e0",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed": "#1f0060",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface": "#fcf9f8",
+                        "secondary-fixed": "#ffe16d",
+                        "surface-tint": "#662ff2",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container": "#f0edec",
+                        "primary-fixed-dim": "#ccbdff",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-surface": "#313030",
+                        "primary-container": "#6c38f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar (Web) -->
+<aside class="bg-surface-container-low dark:bg-inverse-surface h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col shadow-md z-40">
+<div class="flex flex-col h-full gap-2 py-6">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-outline-variant/30">
+<img alt="Merchant Logo" class="w-full h-full object-cover" data-alt="A professional headshot of a small business owner in a well-lit modern cafe. They are smiling warmly at the camera. The lighting is soft and bright, creating a welcoming and trustworthy mood typical of premium corporate stock photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ0wuA9W4Mh2fFvF3uDvaWNHn64r78VO_vyWk8CgJbseVYrdzjt-YPTeZv_PadBZUHVy3BnnyxGLUq9bp_RjtYu4nS7wzWbRbtaYe8Bx5jtC8q-_w2bs9GwR9fjUzpXDkMI3Q9Zwo0d1kP-nY8xy7ZVD4UI9pVc62KEbI93Vo5AMFUYOWqi_0Aief5o-Vymcq0pyXTMFeCZJPpHVoTi9tpSixkPn87t2N60TwMOc7yFqLzV6B7sLJm"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">MoneyMate Merchant</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Verified Partner</p>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto">
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="workspace_premium">workspace_premium</span>
+<span class="font-label-md text-label-md">Rewards</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="local_offer">local_offer</span>
+<span class="font-label-md text-label-md">Offers</span>
+</a>
+<a class="bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl mx-2 flex items-center gap-3 py-3 px-4 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_2" data-weight="fill" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+<span class="font-label-md text-label-md">QR Manager</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="card_membership">card_membership</span>
+<span class="font-label-md text-label-md">Subscriptions</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="how_to_reg">how_to_reg</span>
+<span class="font-label-md text-label-md">KYC Status</span>
+</a>
+</nav>
+<div class="px-4 mt-auto mb-4">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg shadow-sm hover:shadow-md transition-shadow">New Campaign</button>
+</div>
+<div class="border-t border-outline-variant/30 pt-4 mt-2">
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 pb-24 md:pb-0 min-h-screen">
+<!-- TopAppBar (Web) -->
+<header class="bg-surface/80 dark:bg-on-background/80 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-sm border-b border-outline-variant/30 hidden md:block">
+<div class="flex justify-between items-center px-gutter py-4 w-full h-full">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed-dim">MoneyMate</span>
+<nav class="hidden lg:flex gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary font-body-md text-body-md py-2" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary font-body-md text-body-md py-2" href="#">Subscriptions</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary font-body-md text-body-md py-2" href="#">Offers</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary font-bold font-body-md text-body-md py-2" href="#">QR Tools</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-secondary-container text-on-secondary-container font-label-md text-label-md px-4 py-2 rounded-lg flex items-center gap-2 shadow-sm hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-lg" data-icon="star">star</span>
+                        Upgrade to Premium
+                    </button>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container dark:hover:bg-inverse-surface transition-all duration-300 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container dark:hover:bg-inverse-surface transition-all duration-300 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12">
+<div class="mb-8">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-2">My QR Code</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Display this QR code at your checkout or share it digitally to accept quick payments and reward your customers.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- QR Code Display Area (Left Col) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- The QR Card -->
+<div class="bg-surface rounded-[24px] p-8 flex flex-col items-center justify-center shadow-[0_8px_30px_rgba(108,56,248,0.12)] border border-outline-variant/20 relative overflow-hidden group">
+<!-- Decorative background elements for premium feel -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 bg-secondary/5 rounded-full blur-2xl -ml-16 -mb-16 pointer-events-none"></div>
+<div class="w-full max-w-[280px] aspect-square bg-white rounded-xl shadow-sm border border-outline-variant/30 p-4 mb-8 flex items-center justify-center relative">
+<!-- Placeholder for actual QR code image -->
+<img alt="Merchant QR Code" class="w-full h-full object-contain mix-blend-multiply" data-alt="A crisp, high-resolution vector illustration of a modern generic QR code. The QR pattern is a deep, rich purple against a pure white background. The image is flat, graphic, and highly legible, suited for a professional fintech interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvl5_YVgFLWnrbPpOqi2wFK0PrV0vldKnaUb8Ggd1GAj50QQzTqlvXDTRnFo6WjHaVlRh63PdwNCqD6_lhgAAAc0XNXBFOkgUQVcNGXkJsAqD0BoJbkHafvIYblYjLy0Z86_a_yhEHJRT7hWBOtgSlhm_X5VjFw0b9QH_TuN_iwKDdZJPoLherznUnp7evyli8edXylOkpxMES5vpUzpgHHVk4sVri_etsi3nNZuWwz4cGUc4IuAgK"/>
+<!-- Premium Center Logo Overlay -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-1 shadow-sm">
+<div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">M</div>
+</div>
+</div>
+<div class="text-center w-full space-y-4 relative z-10">
+<h3 class="font-headline-md text-headline-md text-on-background">MoneyMate Merchant</h3>
+<div class="flex items-center justify-center gap-2">
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-3 py-1 rounded-full font-mono select-all">ID: MM-9823-XA</span>
+<button class="text-primary hover:text-primary-fixed-variant transition-colors" title="Copy ID">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-3 px-4 rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                            Download
+                        </button>
+<button class="bg-surface border-2 border-primary text-primary font-label-md text-label-md py-3 px-4 rounded-lg hover:bg-surface-container transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="print">print</span>
+                            Print Standee
+                        </button>
+<button class="col-span-2 bg-surface border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-4 rounded-lg hover:bg-surface-container transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+                            Share Link
+                        </button>
+</div>
+<!-- Instructions Card -->
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/20 shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-1 bg-tertiary"></div>
+<h4 class="font-headline-sm text-headline-sm text-on-background mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="info">info</span>
+                            How Customers Earn
+                        </h4>
+<ol class="space-y-3 font-body-sm text-body-sm text-on-surface-variant list-decimal list-inside marker:text-primary marker:font-bold">
+<li>Customer scans QR code using their MoneyMate app.</li>
+<li>They enter the total bill amount and confirm payment.</li>
+<li>Payment is settled instantly; they earn 2% cashback.</li>
+</ol>
+</div>
+</div>
+<!-- Transactions & Data Area (Right Col) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface rounded-xl p-5 shadow-[0_4px_20px_rgba(108,56,248,0.05)] border border-outline-variant/10 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Today's Scans</span>
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">42</div>
+<div class="font-label-sm text-label-sm text-tertiary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                                +12% from yesterday
+                            </div>
+</div>
+<div class="bg-surface rounded-xl p-5 shadow-[0_4px_20px_rgba(108,56,248,0.05)] border border-outline-variant/10 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Scan Volume</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="payments">payments</span>
+</div>
+</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">$1,240.50</div>
+<div class="font-label-sm text-label-sm text-tertiary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                                +5% from yesterday
+                            </div>
+</div>
+</div>
+<!-- Recent Scans Table Card -->
+<div class="bg-surface rounded-xl shadow-[0_4px_20px_rgba(108,56,248,0.05)] border border-outline-variant/10 flex-1 overflow-hidden flex flex-col">
+<div class="p-6 border-b border-outline-variant/20 flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-background">Recent QR Transactions</h3>
+<button class="text-primary font-label-sm text-label-sm hover:underline flex items-center gap-1">
+                                View All <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant border-b border-outline-variant/20">
+<th class="p-4 font-medium">Date &amp; Time</th>
+<th class="p-4 font-medium">Customer</th>
+<th class="p-4 font-medium text-right">Amount</th>
+<th class="p-4 font-medium text-right">Reward Issued</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-background">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-lowest transition-colors">
+<td class="p-4">
+<div>Oct 24, 2023</div>
+<div class="text-on-surface-variant text-xs mt-0.5">14:32 PM</div>
+</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs shrink-0">JD</div>
+<span class="truncate max-w-[100px] md:max-w-full">John D.</span>
+</td>
+<td class="p-4 text-right font-medium">$45.00</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm">
+                                                $0.90
+                                            </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-lowest transition-colors">
+<td class="p-4">
+<div>Oct 24, 2023</div>
+<div class="text-on-surface-variant text-xs mt-0.5">13:15 PM</div>
+</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold text-xs shrink-0">SW</div>
+<span class="truncate max-w-[100px] md:max-w-full">Sarah W.</span>
+</td>
+<td class="p-4 text-right font-medium">$12.50</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm">
+                                                $0.25
+                                            </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-lowest transition-colors">
+<td class="p-4">
+<div>Oct 24, 2023</div>
+<div class="text-on-surface-variant text-xs mt-0.5">11:05 AM</div>
+</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error/20 flex items-center justify-center text-error font-bold text-xs shrink-0">MR</div>
+<span class="truncate max-w-[100px] md:max-w-full">Mike R.</span>
+</td>
+<td class="p-4 text-right font-medium">$120.00</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm">
+                                                $2.40
+                                            </span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-lowest transition-colors">
+<td class="p-4">
+<div>Oct 23, 2023</div>
+<div class="text-on-surface-variant text-xs mt-0.5">18:45 PM</div>
+</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs shrink-0">AL</div>
+<span class="truncate max-w-[100px] md:max-w-full">Anna L.</span>
+</td>
+<td class="p-4 text-right font-medium">$8.75</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm">
+                                                $0.17
+                                            </span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-4">
+<div>Oct 23, 2023</div>
+<div class="text-on-surface-variant text-xs mt-0.5">15:20 PM</div>
+</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-outline/20 flex items-center justify-center text-outline font-bold text-xs shrink-0">UK</div>
+<span class="truncate max-w-[100px] md:max-w-full">Guest User</span>
+</td>
+<td class="p-4 text-right font-medium">$34.20</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm">
+                                                $0.68
+                                            </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-xl fixed bottom-0 w-full md:hidden rounded-t-xl border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(108,56,248,0.1)] z-50 flex justify-around items-center px-4 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm mt-1">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-1">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<!-- Mapping QR to an intent, but since Profile is the closest standard shell item that isn't Home/Analytics/Wallet, we'll keep Profile as fallback or add QR if it was an option. Given the JSON, we must use labels array. Intent: QR tools usually sit in Home or a specific tools area. We will highlight nothing explicitly if it doesn't match perfectly, but since 'Profile' isn't right, and it's a tool, maybe it's accessed via Home. Let's not highlight any to avoid hallucination, or highlight Home. Wait, the prompt says "Dashboard sidebar included", so it's part of the main ecosystem. The BottomNavBar JSON has ["Home", "Analytics", "Wallet", "Profile"]. None strictly match "QR Code". I will highlight Home as intent fallback for dashboard. Actually, active state logic says "ONLY use semantic intent if there is no direct match". Home maps to Dashboard. -->
+<span class="material-symbols-outlined text-xl" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<style>
+        /* Small hack to fix bottom nav layout issues with 5 items instead of 4 due to logic above. Let's rewrite the bottom nav correctly based on JSON. */
+    </style>
+<!-- Replacing Bottom Nav correctly -->
+<script>
+        // Remove the hardcoded 5 items bottom nav and replace with correct 4 item nav highlighting Home.
+        document.addEventListener("DOMContentLoaded", () => {
+            const nav = document.querySelector('nav.fixed.bottom-0');
+            nav.innerHTML = `
+                <a href="#" class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold active:bg-surface-variant/50 scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-xl" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+                    <span class="font-label-sm text-label-sm mt-1">Home</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 transition-transform">
+                    <span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
+                    <span class="font-label-sm text-label-sm mt-1">Analytics</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 transition-transform">
+                    <span class="material-symbols-outlined text-xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+                    <span class="font-label-sm text-label-sm mt-1">Wallet</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 transition-transform">
+                    <span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+                    <span class="font-label-sm text-label-sm mt-1">Profile</span>
+                </a>
+            `;
+        });
+    </script>
+</body></html>
