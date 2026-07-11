@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rewards - MoneyMate Merchant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002108",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#00531e",
+                        "surface-variant": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#e7ddff",
+                        "secondary-fixed-dim": "#e9c400",
+                        "tertiary-container": "#00742d",
+                        "tertiary-fixed": "#69ff87",
+                        "on-secondary-fixed": "#221b00",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6e5c00",
+                        "secondary-container": "#fcd400",
+                        "surface-container-high": "#ebe7e7",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e7deff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#4d00d2",
+                        "tertiary-fixed-dim": "#3ce36a",
+                        "on-tertiary-container": "#5eff82",
+                        "secondary": "#705d00",
+                        "tertiary": "#005920",
+                        "inverse-primary": "#ccbdff",
+                        "on-secondary-fixed-variant": "#544600",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f8",
+                        "outline-variant": "#cac3d9",
+                        "outline": "#7a7488",
+                        "on-surface-variant": "#494456",
+                        "primary": "#5301e0",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed": "#1f0060",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface": "#fcf9f8",
+                        "secondary-fixed": "#ffe16d",
+                        "surface-tint": "#662ff2",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container": "#f0edec",
+                        "primary-fixed-dim": "#ccbdff",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-surface": "#313030",
+                        "primary-container": "#6c38f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #fcf9f8; } /* surface */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0px 4px 20px rgba(108, 56, 248, 0.05);
+        }
+        .premium-glow {
+            box-shadow: 0 0 15px rgba(252, 212, 0, 0.2), inset 0 0 0 1px rgba(252, 212, 0, 0.5); /* secondary-container */
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md text-on-surface antialiased bg-background overflow-x-hidden">
+<!-- TopAppBar (Mobile & Desktop Header) -->
+<header class="bg-surface/80 dark:bg-on-background/80 backdrop-blur-xl shadow-sm docked full-width top-0 sticky z-50 flex justify-between items-center px-gutter py-4 w-full border-b border-outline-variant/30 md:ml-64 transition-all duration-300">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed-dim md:hidden">MoneyMate</span>
+<div class="hidden md:flex gap-6">
+<!-- Top Nav Items based on JSON, suppressing active state logic as sidebar handles it on desktop -->
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:bg-surface-container dark:hover:bg-inverse-surface transition-all duration-300 px-3 py-2 rounded-lg font-label-md text-label-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:bg-surface-container dark:hover:bg-inverse-surface transition-all duration-300 px-3 py-2 rounded-lg font-label-md text-label-md" href="#">Subscriptions</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:bg-surface-container dark:hover:bg-inverse-surface transition-all duration-300 px-3 py-2 rounded-lg font-label-md text-label-md" href="#">Offers</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:bg-surface-container dark:hover:bg-inverse-surface transition-all duration-300 px-3 py-2 rounded-lg font-label-md text-label-md" href="#">QR Tools</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex bg-gradient-to-r from-primary to-primary-container text-on-primary px-4 py-2 rounded-lg shadow-[0_4px_10px_rgba(83,1,224,0.3)] hover:shadow-[0_6px_15px_rgba(83,1,224,0.4)] transition-all cursor-pointer items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">Upgrade to Premium</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-inverse-surface p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-inverse-surface p-2 rounded-full hidden sm:block">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<img alt="Merchant Profile Avatar" class="w-10 h-10 rounded-full border-2 border-surface-container object-cover" data-alt="A professional headshot of a small business owner, well-lit, smiling slightly, set against a soft, blurred modern office background. High quality, corporate modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAFYTLNNPDU2l4D0ieCel1pHg_JD2uitKdNI0StSFRq5_TZjHghhidWJhiVD9Lx9PQkHqAZANPPJkz7X1LYRGf0aXXihC0NtM2OXdI_HhQztRcxmZqr4565niMb1iLe0zqDviUJ8byPQY2hhUtokHI3xx7xd33Lt-u6IExpA85_vB0eJogDrYGCXs7FU3m0GrjvKAd-le-iL_gmpZceM9v9vnSt3ewQnCGnAIyxTPDtZgWsMBJ52XL"/>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="bg-surface-container-low dark:bg-inverse-surface shadow-md h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col z-40 pt-[72px]"> <!-- Added pt to clear header if we wanted it full height, but spec says fixed left-0 top-0 -->
+<div class="p-6 border-b border-outline-variant/20 flex flex-col items-center gap-3">
+<img alt="Merchant Logo" class="w-16 h-16 rounded-xl shadow-sm object-cover" data-alt="A stylized, modern geometric logo for a fintech merchant. Vibrant purples and soft golds, flat vector style with subtle gradients, set on a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOv94E7LjxtyuakN0bilE6NTPRwm2bT5Pn5Lfwn0H4Acnzjuj9YgWQjOKHG9aoB4Wj8DvdjP795ekH0PRbLYvcGuimemwZtLoi9SrI6XjZNMLxY6fwBP_cma6M0lYMW2oGtA71G_nLUObK0yanfpxHExzzJo5gq3Px2n-XnUyXnN0UBWMiVvgQv4O2up-HjsC_S04qjshvd1WfORPwS3VuMXoPJB0AdNuA3Urxf81uUAiLPqic1klH"/>
+<div class="text-center">
+<h2 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">MoneyMate Merchant</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center justify-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+                     Verified Partner
+                 </p>
+</div>
+</div>
+<div class="flex flex-col h-full gap-2 py-6 overflow-y-auto scrollbar-hide">
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Active State -->
+<a class="bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl mx-2 flex items-center gap-3 py-3 px-4 transition-colors duration-200 ease-in-out shadow-[0_4px_12px_rgba(108,56,248,0.2)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-md text-label-md font-bold">Rewards</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">local_offer</span>
+<span class="font-label-md text-label-md">Offers</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">qr_code_2</span>
+<span class="font-label-md text-label-md">QR Manager</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">card_membership</span>
+<span class="font-label-md text-label-md">Subscriptions</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">how_to_reg</span>
+<span class="font-label-md text-label-md">KYC Status</span>
+</a>
+<div class="mt-auto px-4 pb-4">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg shadow-[0_4px_12px_rgba(83,1,224,0.25)] hover:bg-primary-container hover:text-on-primary-container transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    New Campaign
+                </button>
+</div>
+<div class="border-t border-outline-variant/20 pt-4 flex flex-col gap-2">
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-2 px-4 rounded-xl hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-2 px-4 rounded-xl hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 p-margin-mobile md:p-margin-desktop min-h-screen pb-32 md:pb-margin-desktop">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-lg gap-4">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-on-surface">Rewards Center</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage and track your QR scan earnings.</p>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg shadow-[0_4px_12px_rgba(83,1,224,0.3)] hover:-translate-y-0.5 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined">account_balance</span>
+                Redeem to Bank
+            </button>
+</div>
+<!-- Bento Grid Layout for Top Cards -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-lg">
+<!-- Total Rewards (Hero Card) -->
+<div class="md:col-span-8 glass-card rounded-xl p-lg relative overflow-hidden flex flex-col justify-between min-h-[200px]">
+<div class="absolute -right-10 -top-10 w-48 h-48 bg-primary-container rounded-full blur-[80px] opacity-40 z-0"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface-variant">Available Balance</h3>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary tracking-tight">$4,250.00</span>
+<span class="font-body-md text-body-md text-tertiary-container flex items-center bg-tertiary-fixed/30 px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +12% this week
+                        </span>
+</div>
+</div>
+</div>
+<!-- Recent Activity Mini Card -->
+<div class="md:col-span-4 glass-card rounded-xl p-md flex flex-col gap-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Quick Stats</h3>
+<div class="flex justify-between items-center border-b border-outline-variant/20 pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">qr_code_scanner</span>
+<span class="font-body-sm text-body-sm text-on-surface">Total Scans</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">1,204</span>
+</div>
+<div class="flex justify-between items-center pb-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">star_rate</span>
+<span class="font-body-sm text-body-sm text-on-surface">Premium Points</span>
+</div>
+<span class="font-headline-md text-headline-md text-secondary-container">850</span>
+</div>
+</div>
+</div>
+<!-- Filters & Search Bar -->
+<div class="glass-card rounded-xl p-2 mb-md flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="flex items-center bg-surface-container-low rounded-lg px-3 py-2 w-full sm:w-auto border border-outline-variant/30 focus-within:border-primary focus-within:shadow-[0_0_0_2px_rgba(83,1,224,0.2)] transition-all">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface placeholder:text-outline w-full sm:w-64" placeholder="Search transactions..." type="text"/>
+</div>
+<div class="flex gap-2 w-full sm:w-auto overflow-x-auto scrollbar-hide">
+<button class="whitespace-nowrap px-4 py-2 rounded-lg font-label-sm text-label-sm bg-primary-container text-on-primary-container border border-primary/20">All Time</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-lg font-label-sm text-label-sm bg-surface-container-low text-on-surface-variant hover:bg-surface-variant transition-colors border border-outline-variant/30">This Month</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-lg font-label-sm text-label-sm bg-surface-container-low text-on-surface-variant hover:bg-surface-variant transition-colors border border-outline-variant/30">This Week</button>
+<button class="whitespace-nowrap px-2 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-variant transition-colors border border-outline-variant/30 flex items-center">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Transactions List (Bento-style rows) -->
+<div class="bg-surface rounded-xl shadow-[0_4px_20px_rgba(108,56,248,0.05)] border border-outline-variant/10 overflow-hidden">
+<div class="px-md py-4 border-b border-outline-variant/20 bg-surface-container-lowest flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface text-[18px]">Reward History</h3>
+</div>
+<div class="flex flex-col">
+<!-- Row 1 -->
+<div class="flex items-center justify-between p-4 border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">qr_code</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Storefront Scan Campaign</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Today, 14:30 • ID: #QR-8821</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-4">
+<span class="bg-tertiary-fixed/20 text-tertiary-container font-label-sm text-label-sm px-2 py-1 rounded-md hidden sm:inline-block">Settled</span>
+<span class="font-headline-md text-headline-md text-on-surface text-[18px]">+$12.50</span>
+</div>
+</div>
+<!-- Row 2 (Premium Glow) -->
+<div class="flex items-center justify-between p-4 border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="flex items-center gap-4 pl-2">
+<div class="w-12 h-12 rounded-lg bg-secondary-fixed/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform premium-glow">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface flex items-center gap-1">Premium VIP Scan <span class="material-symbols-outlined text-[14px] text-secondary">workspace_premium</span></p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Yesterday, 09:15 • ID: #QR-8820</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-4">
+<span class="bg-tertiary-fixed/20 text-tertiary-container font-label-sm text-label-sm px-2 py-1 rounded-md hidden sm:inline-block">Settled</span>
+<span class="font-headline-md text-headline-md text-secondary text-[18px]">+$50.00</span>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center justify-between p-4 border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">qr_code</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Summer Promo Scan</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Oct 24, 16:45 • ID: #QR-8819</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-4">
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-1 rounded-md hidden sm:inline-block">Pending</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant text-[18px]">+$5.00</span>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">qr_code</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Storefront Scan Campaign</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Oct 23, 11:20 • ID: #QR-8818</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-4">
+<span class="bg-tertiary-fixed/20 text-tertiary-container font-label-sm text-label-sm px-2 py-1 rounded-md hidden sm:inline-block">Settled</span>
+<span class="font-headline-md text-headline-md text-on-surface text-[18px]">+$12.50</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant/20 flex justify-center">
+<button class="text-primary font-label-md text-label-md hover:bg-primary/5 px-4 py-2 rounded-md transition-colors flex items-center gap-1">
+                    View Older Transactions <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe md:hidden rounded-t-xl bg-surface dark:bg-inverse-surface border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(108,56,248,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold active:bg-surface-variant/50 scale-110 transition-transform p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-sm text-label-sm mt-1">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-1">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MoneyMate Merchant - Subscriptions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#002108",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1c1b1b",
+                    "on-tertiary-fixed-variant": "#00531e",
+                    "surface-variant": "#e5e2e1",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#e7ddff",
+                    "secondary-fixed-dim": "#e9c400",
+                    "tertiary-container": "#00742d",
+                    "tertiary-fixed": "#69ff87",
+                    "on-secondary-fixed": "#221b00",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#6e5c00",
+                    "secondary-container": "#fcd400",
+                    "surface-container-high": "#ebe7e7",
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#e7deff",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1c1b1b",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#4d00d2",
+                    "tertiary-fixed-dim": "#3ce36a",
+                    "on-tertiary-container": "#5eff82",
+                    "secondary": "#705d00",
+                    "tertiary": "#005920",
+                    "inverse-primary": "#ccbdff",
+                    "on-secondary-fixed-variant": "#544600",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fcf9f8",
+                    "outline-variant": "#cac3d9",
+                    "outline": "#7a7488",
+                    "on-surface-variant": "#494456",
+                    "primary": "#5301e0",
+                    "surface-dim": "#dcd9d9",
+                    "on-primary-fixed": "#1f0060",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface": "#fcf9f8",
+                    "secondary-fixed": "#ffe16d",
+                    "surface-tint": "#662ff2",
+                    "surface-bright": "#fcf9f8",
+                    "surface-container": "#f0edec",
+                    "primary-fixed-dim": "#ccbdff",
+                    "surface-container-low": "#f6f3f2",
+                    "inverse-surface": "#313030",
+                    "primary-container": "#6c38f8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "40px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "gutter": "24px",
+                    "margin-desktop": "48px",
+                    "unit": "4px",
+                    "margin-mobile": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0px 4px 20px rgba(108, 56, 248, 0.05);
+        }
+        .premium-glow {
+            box-shadow: 0 0 30px rgba(83, 1, 224, 0.15), inset 0 0 0 2px #5301e0;
+        }
+        body {
+            background-color: #fcf9f8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex flex-col md:flex-row min-h-screen">
+<!-- SideNavBar (Desktop) -->
+<nav class="bg-surface-container-low h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col shadow-md z-40">
+<div class="p-6 flex flex-col items-center border-b border-outline-variant/30">
+<img class="w-16 h-16 rounded-full mb-4 object-cover shadow-sm" data-alt="A clean, professional abstract geometric logo representing a modern financial technology brand, utilizing deep purple and crisp white. Soft lighting, corporate aesthetic, isolated on a light background, highly polished." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD4AcE2hqG6x9BH7AKpUmjvj0q_tptKqK8_OBi119gLwbUzH_0pS1DTBFDBrL6nswMX7pcU_SQsBgzVC1HZ_cl0TAJufYloHf8DYXXelG6JsWFKV_KDsTb_Ap0_o2YdRWqqK-FSBEuY2PGnL3EjKOryBzPAhRlme_2b5XeymicgngZ71nB6nL2_tno4tMKpXA2tRevr4YEnuwQF6xqiBxSpol7-4ZK3_MnwXj46Jad--8AGmDPxsxs"/>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">MoneyMate Merchant</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Verified Partner</p>
+</div>
+<div class="px-4 py-6 flex flex-col gap-2 flex-grow">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md text-label-md mb-4 shadow-sm hover:bg-primary/90 transition-colors">
+                New Campaign
+            </button>
+<a class="text-on-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-on-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="workspace_premium">workspace_premium</span>
+                Rewards
+            </a>
+<a class="text-on-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="local_offer">local_offer</span>
+                Offers
+            </a>
+<a class="text-on-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_2">qr_code_2</span>
+                QR Manager
+            </a>
+<a class="bg-primary-container text-on-primary-container rounded-xl mx-2 flex items-center gap-3 py-3 px-4 font-label-md text-label-md transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined fill" data-icon="card_membership">card_membership</span>
+                Subscriptions
+            </a>
+<a class="text-on-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="how_to_reg">how_to_reg</span>
+                KYC Status
+            </a>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant/30 flex flex-col gap-2">
+<a class="text-on-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="text-on-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant transition-colors duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- TopAppBar (Desktop) -->
+<header class="bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-50 flex justify-between items-center px-gutter py-4 w-full md:hidden">
+<!-- Kept minimal for mobile intent handling, usually TopAppBar spans full width, but SideNav is taking precedence in this layout pattern for desktop. Mobile will use BottomNav. -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">MoneyMate</h1>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow md:ml-64 p-gutter md:p-margin-desktop pb-24 md:pb-margin-desktop w-full overflow-x-hidden">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Manage Subscription</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Unlock powerful tools to grow your business and attract more customers.</p>
+</div>
+<!-- Billing Toggle -->
+<div class="flex items-center bg-surface-container-high rounded-full p-1 shadow-sm border border-outline-variant/30">
+<button class="px-6 py-2 rounded-full font-label-md text-label-md bg-surface text-primary shadow-sm" id="toggle-monthly">Monthly</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" id="toggle-yearly">
+                    Yearly <span class="text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full ml-1">Save 20%</span>
+</button>
+</div>
+</div>
+<!-- Pricing Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+<!-- Free Tier -->
+<div class="glass-card rounded-[24px] p-8 flex flex-col h-full border border-outline-variant/50 relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-4 py-1 rounded-bl-lg">Current Plan</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Essential</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 min-h-[40px]">Basic tools for new merchants getting started.</p>
+<div class="mb-8 flex items-baseline">
+<span class="font-display-lg text-display-lg text-on-surface font-bold">$0</span>
+<span class="font-body-md text-body-md text-on-surface-variant ml-1">/mo</span>
+</div>
+<button class="w-full bg-surface-container text-on-surface font-label-md text-label-md py-3 rounded-lg border border-outline-variant/50 mb-8 cursor-default">
+                    Active
+                </button>
+<div class="flex-grow flex flex-col gap-4">
+<p class="font-label-md text-label-md text-on-surface mb-2">Included features:</p>
+<ul class="flex flex-col gap-3 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Standard Dashboard Analytics
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Accept QR Payments
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Basic Support
+                        </li>
+<li class="flex items-start gap-3 opacity-50">
+<span class="material-symbols-outlined text-outline text-[20px]" data-icon="close">close</span>
+                            Posting Offers
+                        </li>
+<li class="flex items-start gap-3 opacity-50">
+<span class="material-symbols-outlined text-outline text-[20px]" data-icon="close">close</span>
+                            Customer Reward Programs
+                        </li>
+</ul>
+</div>
+</div>
+<!-- Premium Tier (Highlighted) -->
+<div class="bg-surface rounded-[24px] p-8 flex flex-col h-full premium-glow relative transform md:-translate-y-4 shadow-[0_20px_40px_rgba(108,56,248,0.1)] z-10">
+<div class="absolute top-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary to-primary-container text-on-primary font-label-md text-label-md px-6 py-1.5 rounded-b-lg shadow-sm whitespace-nowrap">
+                    Most Popular
+                </div>
+<div class="flex justify-between items-center mb-2 mt-4">
+<h3 class="font-headline-md text-headline-md text-primary font-bold">Premium</h3>
+<span class="material-symbols-outlined fill text-secondary-fixed-dim text-[28px]" data-icon="workspace_premium">workspace_premium</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 min-h-[40px]">Everything you need to attract and retain customers.</p>
+<div class="mb-8 flex items-baseline">
+<span class="font-display-lg text-display-lg text-on-surface font-bold">$29</span>
+<span class="font-body-md text-body-md text-on-surface-variant ml-1">/mo</span>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md py-3.5 rounded-lg shadow-md mb-8 transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                    Upgrade Now
+                </button>
+<div class="flex-grow flex flex-col gap-4">
+<p class="font-label-md text-label-md text-on-surface mb-2">Everything in Essential, plus:</p>
+<ul class="flex flex-col gap-3 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-start gap-3 bg-primary-fixed/30 p-2 rounded-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary text-[20px] fill" data-icon="campaign">campaign</span>
+<span class="font-bold text-primary">Posting Offers to Network</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Advanced Analytics &amp; Insights
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Custom Reward Programs
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Priority Email Support
+                        </li>
+</ul>
+</div>
+</div>
+<!-- Premium+ Tier -->
+<div class="glass-card rounded-[24px] p-8 flex flex-col h-full border border-outline-variant/50">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Premium+</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 min-h-[40px]">For high-volume merchants needing maximum reach.</p>
+<div class="mb-8 flex items-baseline">
+<span class="font-display-lg text-display-lg text-on-surface font-bold">$89</span>
+<span class="font-body-md text-body-md text-on-surface-variant ml-1">/mo</span>
+</div>
+<button class="w-full bg-surface hover:bg-surface-variant text-primary font-label-md text-label-md py-3 rounded-lg border-2 border-primary mb-8 transition-colors">
+                    Upgrade Now
+                </button>
+<div class="flex-grow flex flex-col gap-4">
+<p class="font-label-md text-label-md text-on-surface mb-2">Everything in Premium, plus:</p>
+<ul class="flex flex-col gap-3 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Unlimited Offer Postings
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Featured Placement in App
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            Dedicated Account Manager
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+                            0% Transaction Fees
+                        </li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Feature highlight banner -->
+<div class="mt-16 bg-gradient-to-r from-surface-container to-surface-container-high rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-sm border border-outline-variant/20">
+<div class="w-full md:w-1/3 flex justify-center">
+<div class="w-32 h-32 bg-primary-container rounded-full flex items-center justify-center shadow-lg relative">
+<span class="material-symbols-outlined text-on-primary-container text-[64px]" data-icon="storefront">storefront</span>
+<div class="absolute -top-2 -right-2 bg-secondary-container text-on-secondary-container rounded-full w-10 h-10 flex items-center justify-center shadow-md transform rotate-12">
+<span class="material-symbols-outlined text-[24px]" data-icon="local_fire_department">local_fire_department</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-2/3">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-3">Why Upgrade to Premium?</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Merchants who utilize the "Posting Offers" feature see an average of <strong>45% increase in foot traffic</strong> within the first 30 days. Don't miss out on connecting directly with consumers looking to spend.</p>
+<a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md hover:underline" href="#">
+                    View Success Stories
+                    <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface/90 backdrop-blur-xl md:hidden border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(108,56,248,0.1)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm active:bg-surface-variant/50 p-2 rounded-lg transition-transform hover:scale-110" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="home">home</span>
+            Home
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm active:bg-surface-variant/50 p-2 rounded-lg transition-transform hover:scale-110" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
+            Analytics
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm active:bg-surface-variant/50 p-2 rounded-lg transition-transform hover:scale-110" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+            Wallet
+        </a>
+<a class="flex flex-col items-center justify-center text-primary font-bold font-label-sm text-label-sm p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl fill" data-icon="person">person</span>
+            Profile
+        </a>
+</nav>
+<script>
+        // Simple toggle logic for demo purposes
+        document.getElementById('toggle-monthly').addEventListener('click', function() {
+            this.classList.replace('text-on-surface-variant', 'text-primary');
+            this.classList.replace('hover:text-primary', 'bg-surface');
+            this.classList.add('shadow-sm');
+            
+            let yearly = document.getElementById('toggle-yearly');
+            yearly.classList.replace('text-primary', 'text-on-surface-variant');
+            yearly.classList.replace('bg-surface', 'hover:text-primary');
+            yearly.classList.remove('shadow-sm');
+        });
+
+        document.getElementById('toggle-yearly').addEventListener('click', function() {
+            this.classList.replace('text-on-surface-variant', 'text-primary');
+            this.classList.remove('hover:text-primary');
+            this.classList.add('bg-surface', 'shadow-sm');
+            
+            let monthly = document.getElementById('toggle-monthly');
+            monthly.classList.replace('text-primary', 'text-on-surface-variant');
+            monthly.classList.remove('bg-surface', 'shadow-sm');
+            monthly.classList.add('hover:text-primary');
+        });
+    </script>
+</body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MoneyMate Merchant - KYC Status</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002108",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#00531e",
+                        "surface-variant": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#e7ddff",
+                        "secondary-fixed-dim": "#e9c400",
+                        "tertiary-container": "#00742d",
+                        "tertiary-fixed": "#69ff87",
+                        "on-secondary-fixed": "#221b00",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6e5c00",
+                        "secondary-container": "#fcd400",
+                        "surface-container-high": "#ebe7e7",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e7deff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#4d00d2",
+                        "tertiary-fixed-dim": "#3ce36a",
+                        "on-tertiary-container": "#5eff82",
+                        "secondary": "#705d00",
+                        "tertiary": "#005920",
+                        "inverse-primary": "#ccbdff",
+                        "on-secondary-fixed-variant": "#544600",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f8",
+                        "outline-variant": "#cac3d9",
+                        "outline": "#7a7488",
+                        "on-surface-variant": "#494456",
+                        "primary": "#5301e0",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed": "#1f0060",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface": "#fcf9f8",
+                        "secondary-fixed": "#ffe16d",
+                        "surface-tint": "#662ff2",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container": "#f0edec",
+                        "primary-fixed-dim": "#ccbdff",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-surface": "#313030",
+                        "primary-container": "#6c38f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0px 4px 20px rgba(108, 56, 248, 0.05);
+        }
+        .premium-glow {
+            box-shadow: 0 0 15px rgba(108, 56, 248, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-low dark:bg-inverse-surface h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col shadow-md z-40">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-4 mb-8">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A clean, modern geometric logo design suitable for a premium fintech merchant platform. The logo uses a palette of soft purple and deep black, conveying trust, security, and efficiency in a light-mode corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6io3brzOcelPYsH4XPK85bDPW-5lHH1P1EavJvXBWsufhrTd1_uLgs-2pwgH5sNzQU6syFcTGmf_7955rlL2vO-xBnFbX08WR8xhdiVyiRClRvmvflnSei4XEapzvbS8-fKJCe-4JIRSegyUh91JenP0k0AnxxEtIMEeGBkCjvW_lOoLPdnp4sRLMrsm7-4tsrcnZL_Mg7Ml_POcUkNDhrXeKlNxE9WqLAM9qPTh6fO7yjqPOc4a0"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">MoneyMate Merchant</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Verified Partner</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 px-4 rounded-lg shadow-sm hover:shadow-md transition-all mb-6 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Campaign
+            </button>
+</div>
+<div class="flex flex-col h-full gap-2 py-2 overflow-y-auto flex-grow">
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span class="font-label-md text-label-md">Rewards</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">local_offer</span>
+<span class="font-label-md text-label-md">Offers</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">qr_code_2</span>
+<span class="font-label-md text-label-md">QR Manager</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">card_membership</span>
+<span class="font-label-md text-label-md">Subscriptions</span>
+</a>
+<a class="bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl mx-2 flex items-center gap-3 py-3 px-4 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">how_to_reg</span>
+<span class="font-label-md text-label-md">KYC Status</span>
+</a>
+</div>
+<div class="mt-auto p-4 border-t border-outline-variant/20">
+<div class="flex flex-col gap-2">
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-2 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant mx-2 flex items-center gap-3 py-2 px-4 rounded-xl hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- TopAppBar (Mobile Only) -->
+<header class="bg-surface/80 dark:bg-on-background/80 backdrop-blur-xl shadow-sm w-full top-0 sticky z-50 md:hidden flex justify-between items-center px-4 py-4 border-b border-outline-variant/30">
+<h1 class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed-dim">MoneyMate</h1>
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined hover:bg-surface-container dark:hover:bg-inverse-surface transition-all duration-300 p-2 rounded-full cursor-pointer">notifications</span>
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A clean, modern geometric logo design suitable for a premium fintech merchant platform. The logo uses a palette of soft purple and deep black, conveying trust, security, and efficiency in a light-mode corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf7IOHEzPExYNsSOVAHoQFnwEaJdNVLN4nxDXg9u_hBtszlI5_Im08rnd-YDhTpiGZ5uM68OJ_cQuOAxoiOKbFLK9hD615sV1xqXp21ajzA2He4J8cyPI-ufWoITa3-3OXGslBxvcfN76-TGshQcegsh5e0qzJ03PBfqQrHHJu27mOjbEhutQZk9cFteEGCs4x0yfiPZ3868mlY9HooEzVr1YIP23FeBSAi2jHJpTta933SVfKxQVx"/>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-4 md:p-8 lg:p-12 mb-20 md:mb-0">
+<div class="max-w-5xl mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Profile &amp; KYC</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your business information and compliance status.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Business Info (Takes up 2 columns on lg screens) -->
+<div class="lg:col-span-2 space-y-6">
+<div class="glass-card rounded-xl p-6 md:p-8 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-xl"></div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">storefront</span>
+                            Business Information
+                        </h3>
+<form class="space-y-5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Legal Business Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="Apex Innovations LLC"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Doing Business As (DBA)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="Apex Tech"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Registered Address</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="123 Innovation Drive, Tech District, CA 90210"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Business Type</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none">
+<option>Limited Liability Company (LLC)</option>
+<option>Corporation</option>
+<option>Sole Proprietorship</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Tax ID / EIN</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="XX-XXXXXXX" type="password" value="123456789"/>
+</div>
+</div>
+<div class="pt-4 flex justify-end gap-3 border-t border-outline-variant/30">
+<button class="px-6 py-2 rounded-lg font-label-md text-label-md text-primary hover:bg-primary/5 transition-colors" type="button">Cancel</button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md" type="button">Save Changes</button>
+</div>
+</form>
+</div>
+<div class="glass-card rounded-xl p-6 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container rounded-l-xl"></div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+                            Primary Contact
+                        </h3>
+<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-lg border border-outline-variant/20">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-headline-md">
+                                JD
+                            </div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">John Doe</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">john.doe@apextech.com • (555) 123-4567</p>
+</div>
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- KYC Status Card (1 column on lg screens) -->
+<div class="space-y-6">
+<div class="glass-card rounded-xl p-6 relative premium-glow border border-primary/20">
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                                KYC Status
+                            </h3>
+<span class="bg-tertiary-container/10 text-tertiary-container font-label-sm px-3 py-1 rounded-full flex items-center gap-1 border border-tertiary-container/20">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                Verified
+                            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Your business identity has been verified. You have full access to all merchant features and high transaction limits.</p>
+<div class="space-y-4">
+<div class="flex justify-between items-center py-3 border-b border-outline-variant/20">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Certificate of Incorporation</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Approved • Oct 12, 2023</p>
+</div>
+</div>
+<button class="text-primary hover:bg-primary/10 p-1.5 rounded transition-colors" title="View Document">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<div class="flex justify-between items-center py-3 border-b border-outline-variant/20">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Director ID</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Approved • Oct 12, 2023</p>
+</div>
+</div>
+<button class="text-primary hover:bg-primary/10 p-1.5 rounded transition-colors" title="View Document">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full py-2.5 border border-primary text-primary font-label-md text-label-md rounded-lg hover:bg-primary/5 transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined">upload_file</span>
+                                Update Documents
+                            </button>
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-3 opacity-70">Next review due: Oct 2024</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full md:hidden rounded-t-xl bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(108,56,248,0.1)] z-50 flex justify-around items-center px-4 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl">analytics</span>
+<span class="font-label-sm text-label-sm mt-1">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-1">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold active:bg-surface-variant/50 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

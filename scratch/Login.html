@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MoneyMate Merchant - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002108",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#00531e",
+                        "surface-variant": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#e7ddff",
+                        "secondary-fixed-dim": "#e9c400",
+                        "tertiary-container": "#00742d",
+                        "tertiary-fixed": "#69ff87",
+                        "on-secondary-fixed": "#221b00",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6e5c00",
+                        "secondary-container": "#fcd400",
+                        "surface-container-high": "#ebe7e7",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e7deff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#4d00d2",
+                        "tertiary-fixed-dim": "#3ce36a",
+                        "on-tertiary-container": "#5eff82",
+                        "secondary": "#705d00",
+                        "tertiary": "#005920",
+                        "inverse-primary": "#ccbdff",
+                        "on-secondary-fixed-variant": "#544600",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f8",
+                        "outline-variant": "#cac3d9",
+                        "outline": "#7a7488",
+                        "on-surface-variant": "#494456",
+                        "primary": "#5301e0",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed": "#1f0060",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface": "#fcf9f8",
+                        "secondary-fixed": "#ffe16d",
+                        "surface-tint": "#662ff2",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container": "#f0edec",
+                        "primary-fixed-dim": "#ccbdff",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-surface": "#313030",
+                        "primary-container": "#6c38f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F8F9FE; /* Level 0 Base */
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0px 8px 30px rgba(108, 56, 248, 0.12); /* Level 2 Shadow for prominence */
+        }
+        .input-glow:focus {
+            box-shadow: 0 0 0 4px rgba(83, 1, 224, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop font-body-md text-on-surface">
+<main class="w-full max-w-[480px] mx-auto">
+<!-- Trust Badge / Header -->
+<div class="text-center mb-8 flex flex-col items-center">
+<div class="w-16 h-16 bg-primary-container text-primary rounded-xl flex items-center justify-center mb-4 shadow-[0_4px_20px_rgba(108,56,248,0.1)]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">storefront</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">MoneyMate</h1>
+<div class="inline-flex items-center gap-2 bg-surface-variant/50 px-3 py-1.5 rounded-full mt-2">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Verified Merchant Platform</span>
+</div>
+</div>
+<!-- Login Card -->
+<div class="glass-card rounded-[24px] p-6 md:p-8">
+<h2 class="font-headline-md text-headline-md mb-6 text-center">Welcome back</h2>
+<form action="#" class="space-y-6" method="POST">
+<!-- Email / Phone Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="identity">Email or Phone</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded-lg text-body-md focus:ring-primary focus:border-primary input-glow transition-all duration-200 bg-surface placeholder-outline" id="identity" name="identity" placeholder="merchant@example.com" required="" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<label class="block font-label-md text-label-md text-on-surface-variant" for="password">Password</label>
+<a class="font-label-md text-label-md text-primary hover:text-primary-fixed-variant transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">lock</span>
+</div>
+<input class="block w-full pl-10 pr-10 py-3 border border-outline-variant rounded-lg text-body-md focus:ring-primary focus:border-primary input-glow transition-all duration-200 bg-surface placeholder-outline" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface-variant" type="button">
+<span class="material-symbols-outlined">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Login Action -->
+<button class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-fixed-variant focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200" type="submit">
+                    Sign In to Dashboard
+                </button>
+</form>
+<!-- Registration Link -->
+<div class="mt-8 pt-6 border-t border-outline-variant/30 text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    New merchant? 
+                    <a class="font-label-md text-label-md text-primary hover:text-primary-fixed-variant transition-colors ml-1" href="#">Register your business</a>
+</p>
+</div>
+</div>
+<!-- Footer / Legal -->
+<div class="mt-8 text-center">
+<p class="font-body-sm text-body-sm text-outline">Secure connection encrypted by MoneyMate</p>
+</div>
+</main>
+</body></html>
