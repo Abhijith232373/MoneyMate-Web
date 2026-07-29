@@ -84,7 +84,7 @@ export default function Welcome({ navigate }) {
 
         {/* Right Column: Premium Mockup/Visuals */}
         <div className="lg:col-span-6 flex justify-center relative animate-scale-up delay-200">
-          <div className="w-full max-w-lg bg-white rounded-3xl p-6 shadow-2xl border border-outline-variant/30 relative overflow-hidden group">
+          <div className="w-full max-w-lg bg-surface-container rounded-3xl p-6 shadow-2xl border border-outline-variant/30 relative overflow-hidden group">
             {/* Soft decorative ring inside mockup */}
             <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
 
@@ -131,7 +131,7 @@ export default function Welcome({ navigate }) {
 
           {/* Floating badge */}
           <div className="absolute -bottom-6 -left-6 bg-secondary-container text-on-secondary-container p-4 rounded-2xl shadow-xl flex items-center gap-3 border border-outline-variant/30 animate-float">
-            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-secondary">
+            <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary">
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
             </div>
             <div>
@@ -143,7 +143,7 @@ export default function Welcome({ navigate }) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-outline-variant/30 py-6 text-center text-on-surface-variant font-body-sm text-body-sm z-10 bg-white/40">
+      <footer className="border-t border-outline-variant/30 py-6 text-center text-on-surface-variant font-body-sm text-body-sm z-10 bg-surface-container-low">
         © 2026 MoneyMate Inc. All rights reserved.
       </footer>
     </div>

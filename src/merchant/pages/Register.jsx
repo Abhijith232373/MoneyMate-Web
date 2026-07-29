@@ -81,7 +81,7 @@ export default function Register({ navigate, showToast }) {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -mr-48 -mt-48 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[120px] -ml-60 -mb-60 pointer-events-none"></div>
 
-      <div className="max-w-2xl w-full bg-white rounded-3xl p-8 md:p-12 border border-outline-variant/30 shadow-2xl relative z-10 animate-scale-up">
+      <div className="max-w-2xl w-full bg-surface-container rounded-3xl p-8 md:p-12 border border-outline-variant/30 shadow-2xl relative z-10 animate-scale-up">
         {/* Top Header */}
         <div className="text-center mb-8">
           <div 

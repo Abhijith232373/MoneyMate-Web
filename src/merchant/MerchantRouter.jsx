@@ -81,7 +81,7 @@ export default function MerchantRouter() {
       {/* Global Animated Premium Toast Notification */}
       {toast && (
         <div 
-          className={`fixed bottom-6 right-6 z-50 animate-slide-in-right bg-white rounded-2xl shadow-2xl border p-4 max-w-sm flex items-start gap-3.5 transition-all duration-300 border-outline-variant/40`}
+          className={`fixed bottom-6 right-6 z-50 animate-slide-in-right bg-surface-container rounded-2xl shadow-2xl border p-4 max-w-sm flex items-start gap-3.5 transition-all duration-300 border-outline-variant/40`}
           style={{ boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)' }}
         >
           {/* Accent Line */}

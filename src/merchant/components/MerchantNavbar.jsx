@@ -67,12 +67,17 @@ export default function MerchantNavbar({ currentPath, navigate }) {
       {/* Desktop view */}
       <div className="hidden md:flex justify-between items-center px-8 py-4 relative">
         <div className="flex items-center gap-8">
-          <span 
+          <div 
             onClick={() => navigate('/merchant/dashboard')}
-            className="font-display-lg text-headline-md font-bold text-primary cursor-pointer select-none"
+            className="flex items-center gap-2 cursor-pointer select-none"
           >
-            MoneyMate
-          </span>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-lg bg-gradient-to-r from-[#9030ff] to-[#00d0ff] text-white shadow-lg shadow-primary/20">
+              M
+            </div>
+            <span className="font-display-lg text-headline-md font-bold text-on-surface">
+              MoneyMate
+            </span>
+          </div>
           <span className="font-label-md text-label-md text-on-surface-variant font-medium bg-surface-container px-3.5 py-1.5 rounded-full border border-outline-variant/20">
             Merchant Portal
           </span>
@@ -107,7 +112,7 @@ export default function MerchantNavbar({ currentPath, navigate }) {
 
             {/* Notification Dropdown Panel */}
             {showNotifications && (
-              <div className="absolute right-0 top-12 w-80 bg-white rounded-2xl border border-outline-variant/30 shadow-2xl z-50 p-4 animate-scale-up">
+              <div className="absolute right-0 top-12 w-80 bg-surface-container rounded-2xl border border-outline-variant/30 shadow-2xl z-50 p-4 animate-scale-up">
                 <div className="flex justify-between items-center pb-2.5 border-b border-outline-variant/20 mb-2.5">
                   <h4 className="font-label-md text-label-md text-on-background font-bold">Notifications</h4>
                   {unreadCount > 0 && (
@@ -160,12 +165,17 @@ export default function MerchantNavbar({ currentPath, navigate }) {
 
       {/* Mobile view */}
       <div className="flex md:hidden justify-between items-center px-6 py-4 relative">
-        <span 
+        <div 
           onClick={() => navigate('/merchant/dashboard')}
-          className="font-display-lg text-headline-md font-bold text-primary cursor-pointer select-none"
+          className="flex items-center gap-2 cursor-pointer select-none"
         >
-          MoneyMate
-        </span>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-lg bg-gradient-to-r from-[#9030ff] to-[#00d0ff] text-white shadow-lg shadow-primary/20">
+            M
+          </div>
+          <span className="font-display-lg text-headline-md font-bold text-on-surface hidden sm:block">
+            MoneyMate
+          </span>
+        </div>
         <div className="flex items-center gap-4">
           <button onClick={() => setShowNotifications(!showNotifications)} className="text-primary relative">
             <span className="material-symbols-outlined">notifications</span>
@@ -186,7 +196,7 @@ export default function MerchantNavbar({ currentPath, navigate }) {
 
           {/* Mobile notification dropdown */}
           {showNotifications && (
-            <div className="absolute right-6 top-14 w-72 bg-white rounded-2xl border border-outline-variant/30 shadow-2xl z-50 p-4 animate-scale-up">
+            <div className="absolute right-6 top-14 w-72 bg-surface-container rounded-2xl border border-outline-variant/30 shadow-2xl z-50 p-4 animate-scale-up">
               <div className="flex justify-between items-center pb-2.5 border-b border-outline-variant/20 mb-2.5">
                 <h4 className="font-label-md text-label-md text-on-background font-bold">Notifications</h4>
                 {unreadCount > 0 && (

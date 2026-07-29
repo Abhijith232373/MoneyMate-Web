@@ -71,7 +71,7 @@ export default function CreateOffer({ navigate, showToast }) {
           )}
 
           {/* Form Card */}
-          <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-outline-variant/30 p-6 md:p-8 shadow-sm relative overflow-hidden animate-scale-up delay-75">
+          <div className="bg-surface-container backdrop-blur-md rounded-2xl border border-outline-variant/30 p-6 md:p-8 shadow-sm relative overflow-hidden animate-scale-up delay-75">
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-2xl"></div>
 
             <form onSubmit={handleSubmit} className="space-y-6">

@@ -37,7 +37,7 @@ export default function Login({ navigate, showToast }) {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -mr-48 -mt-48 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[120px] -ml-60 -mb-60 pointer-events-none"></div>
 
-      <div className="max-w-md w-full bg-white rounded-3xl p-8 md:p-10 border border-outline-variant/30 shadow-2xl relative z-10 space-y-8 animate-scale-up">
+      <div className="max-w-md w-full bg-surface-container rounded-3xl p-8 md:p-10 border border-outline-variant/30 shadow-2xl relative z-10 space-y-8 animate-scale-up">
         {/* Header */}
         <div className="text-center">
           <div 
