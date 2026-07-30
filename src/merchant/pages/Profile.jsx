@@ -86,7 +86,7 @@ export default function Profile({ navigate, showToast }) {
       <MerchantSidebar currentPath={currentPath} navigate={navigate} />
 
       {/* Main Container */}
-      <div className="flex-grow md:ml-64 flex flex-col">
+      <div className="flex-grow md:ml-[280px] flex flex-col">
         {/* Top Navbar */}
         <MerchantNavbar currentPath={currentPath} navigate={navigate} />
 

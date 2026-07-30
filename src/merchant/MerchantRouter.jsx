@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import FloatingCoinsBackground from './components/FloatingCoinsBackground';
 import Welcome from './pages/Welcome';
 import Register from './pages/Register';
 import VerificationPending from './pages/VerificationPending';
@@ -75,8 +76,14 @@ export default function MerchantRouter() {
   };
 
   return (
-    <div className="min-h-screen bg-background transition-colors duration-200 relative">
-      {renderPage()}
+    <div className="min-h-screen bg-background transition-colors duration-200 relative overflow-hidden">
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <FloatingCoinsBackground />
+      </div>
+      
+      <div className="relative z-10">
+        {renderPage()}
+      </div>
 
       {/* Global Animated Premium Toast Notification */}
       {toast && (

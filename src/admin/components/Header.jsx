@@ -2,7 +2,7 @@ import { Bell, Search } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="h-[72px] bg-admin-surface-container border-b border-admin-outline-variant flex items-center justify-between px-6 shrink-0 sticky top-0 z-10 font-[Inter] shadow-sm">
+    <header className="h-[72px] bg-admin-surface-container border-b border-admin-outline-variant flex items-center justify-between px-6 shrink-0 sticky top-0 z-10 shadow-sm">
       <div className="flex-1 max-w-xl flex items-center gap-2 px-4 py-2.5 rounded-xl bg-admin-background border border-admin-outline-variant/30 focus-within:border-admin-primary focus-within:ring-2 focus-within:ring-admin-primary/20 transition-all shadow-inner">
         <Search className="w-4 h-4 text-admin-on-surface-variant" />
         <input 

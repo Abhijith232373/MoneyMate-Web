@@ -65,10 +65,10 @@ export default function Sidebar() {
   return (
     <div className="w-[280px] flex-shrink-0 bg-admin-surface-container border-r border-admin-outline-variant h-screen flex flex-col overflow-hidden shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
       <div className="h-[72px] flex items-center px-6 border-b border-admin-outline-variant shrink-0 gap-3">
-        <div className="w-8 h-8 bg-gradient-to-br from-admin-primary to-admin-surface-tint rounded-lg flex items-center justify-center shadow-lg shadow-admin-primary/20">
-          <ShieldAlert className="w-5 h-5 text-white" />
+        <div className="w-9 h-9 overflow-hidden flex-shrink-0 flex items-start justify-center">
+          <img src="/logo.png" alt="M" className="w-full h-full object-cover object-top scale-[1.4] origin-top mix-blend-screen" />
         </div>
-        <h1 className="text-xl font-bold text-admin-on-surface tracking-tight">QR Admin</h1>
+        <h1 className="text-[22px] font-extrabold text-white tracking-tight">MoneyMate</h1>
       </div>
       
       <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-6 custom-scrollbar">

@@ -30,7 +30,7 @@ export default function MerchantSidebar({ currentPath, navigate }) {
   return (
     <div className="w-[280px] flex-shrink-0 bg-surface-container border-r border-outline-variant h-screen hidden md:flex flex-col overflow-hidden shadow-[4px_0_24px_rgba(0,0,0,0.2)] fixed left-0 top-0 z-40 transition-colors duration-200">
       <div className="h-[72px] flex items-center px-6 border-b border-outline-variant shrink-0 gap-3">
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-lg bg-gradient-to-r from-[#9030ff] to-[#00d0ff] text-white shadow-lg shadow-primary/20">
+        <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-lg bg-gradient-to-r from-[#a87ffb] to-[#00d0ff] text-white shadow-lg shadow-primary/20">
           M
         </div>
         <div>
@@ -55,14 +55,14 @@ export default function MerchantSidebar({ currentPath, navigate }) {
                     "flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 relative group w-full text-left",
                     isActive 
                       ? "bg-primary/10 text-primary font-bold" 
-                      : "text-slate-200 hover:bg-surface-container-high hover:text-white"
+                      : "text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
                   )}
                 >
                   {isActive && (
                     <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full shadow-[0_0_8px_rgba(139,61,255,0.6)]" />
                   )}
                   <item.icon 
-                    className={cn("w-[22px] h-[22px] flex-shrink-0 transition-colors", isActive ? "text-primary" : "text-slate-300 group-hover:text-white")} 
+                    className={cn("w-[22px] h-[22px] flex-shrink-0 transition-colors", isActive ? "text-primary" : "text-on-surface-variant group-hover:text-on-surface")} 
                     strokeWidth={isActive ? 2.5 : 2.25} 
                   />
                   {item.name}
@@ -77,9 +77,9 @@ export default function MerchantSidebar({ currentPath, navigate }) {
         <div className="flex flex-col gap-1">
           <button 
             onClick={() => navigate('/merchant/profile')}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-surface-container-high hover:text-white transition-all duration-200 w-full text-left"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 w-full text-left"
           >
-            <Settings className="w-[22px] h-[22px] flex-shrink-0 text-slate-300" strokeWidth={2.25} />
+            <Settings className="w-[22px] h-[22px] flex-shrink-0 text-on-surface-variant" strokeWidth={2.25} />
             Settings
           </button>
           <button 

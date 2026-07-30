@@ -2,13 +2,13 @@ import React from 'react';
 
 export default function Welcome({ navigate }) {
   return (
-    <div className="bg-background text-on-background min-h-screen flex flex-col justify-between relative overflow-hidden font-body-md">
+    <div className="bg-transparent text-on-background min-h-screen flex flex-col justify-between relative overflow-hidden font-body-md">
       {/* Decorative top background gradient */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -mr-48 -mt-48 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[120px] -ml-60 -mb-60 pointer-events-none"></div>
 
       {/* Header */}
-      <header className="max-w-7xl w-full mx-auto px-6 py-6 flex justify-between items-center z-10">
+      <header className="w-full max-w-[1600px] mx-auto px-8 lg:px-16 xl:px-24 py-8 flex justify-between items-center z-10">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">
             M
@@ -24,7 +24,7 @@ export default function Welcome({ navigate }) {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl w-full mx-auto px-6 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10 flex-grow">
+      <main className="w-full max-w-[1600px] mx-auto px-8 lg:px-16 xl:px-24 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-20 items-center z-10 flex-grow">
         {/* Left Column: Wording & Actions */}
         <div className="lg:col-span-6 space-y-8 animate-slide-in-left">
           <div className="space-y-4">

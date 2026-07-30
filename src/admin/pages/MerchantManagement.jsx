@@ -444,7 +444,7 @@ export default function MerchantManagement() {
           </button>
           <button 
             onClick={(e) => handleOpenEdit(row, e)}
-            className="p-1.5 bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white rounded-lg transition-all" 
+            className="p-1.5 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white rounded-lg transition-all" 
             title="Edit Merchant Details"
           >
             <Edit3 className="w-4 h-4" />
@@ -452,7 +452,7 @@ export default function MerchantManagement() {
           {row.kycStatus === "Pending" && (
             <button 
               onClick={(e) => handleApproveKYC(row.id, e)}
-              className="p-1.5 bg-green-50 text-green-600 hover:bg-green-600 hover:text-white rounded-lg transition-all" 
+              className="p-1.5 bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white rounded-lg transition-all" 
               title="Approve KYC & Activate"
             >
               <UserCheck className="w-4 h-4" />
@@ -462,8 +462,8 @@ export default function MerchantManagement() {
             onClick={(e) => handleToggleStatus(row.id, row.status, e)}
             className={`p-1.5 rounded-lg transition-all ${
               row.status === "Active" 
-                ? "bg-red-50 text-red-600 hover:bg-red-600 hover:text-white" 
-                : "bg-green-50 text-green-600 hover:bg-green-600 hover:text-white"
+                ? "bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white" 
+                : "bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white"
             }`}
             title={row.status === "Active" ? "Suspend Merchant" : "Activate Merchant"}
           >
@@ -471,7 +471,7 @@ export default function MerchantManagement() {
           </button>
           <button 
             onClick={(e) => handleOpenDelete(row, e)}
-            className="p-1.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition-all" 
+            className="p-1.5 bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white rounded-lg transition-all" 
             title="Delete Merchant Store"
           >
             <Trash2 className="w-4 h-4" />
@@ -521,9 +521,9 @@ export default function MerchantManagement() {
           
           <button 
             onClick={handleExportPDF}
-            className="px-3.5 py-2 bg-indigo-50 border border-indigo-200 text-indigo-700 rounded-xl font-semibold shadow-sm hover:bg-indigo-100 transition-all flex items-center gap-2 text-xs sm:text-sm"
+            className="px-3.5 py-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-xl font-semibold shadow-sm hover:bg-indigo-500/20 transition-all flex items-center gap-2 text-xs sm:text-sm"
           >
-            <Printer className="w-4 h-4 text-indigo-600 shrink-0" />
+            <Printer className="w-4 h-4 text-indigo-400 shrink-0" />
             <span>Export PDF</span>
           </button>
 
