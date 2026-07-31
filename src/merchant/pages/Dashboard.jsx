@@ -9,7 +9,7 @@ export default function Dashboard({ navigate, showToast }) {
   const currentPath = '/merchant/dashboard';
   const [stats, setStats] = useState([]);
   const [transactions, setTransactions] = useState([]);
-  const [businessName, setBusinessName] = useState('Apex Innovations LLC');
+  const [businessName, setBusinessName] = useState('Your Business');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Dashboard({ navigate, showToast }) {
         
         const profileResponse = await gatewayClient.getProfile();
         if (profileResponse.success && profileResponse.data) {
-          setBusinessName(profileResponse.data.businessName || 'Apex Innovations LLC');
+          setBusinessName(profileResponse.data.businessName || 'Your Business');
         }
       } catch (error) {
         console.error('Error loading dashboard details:', error);

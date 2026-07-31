@@ -7,7 +7,8 @@ import { gatewayClient } from '../../api/gatewayClient';
 
 export default function PaymentQR({ navigate, showToast }) {
   const currentPath = '/merchant/payment-qr';
-  const [merchantId, setMerchantId] = useState('MM-9823-XA');
+  const [merchantId, setMerchantId] = useState('');
+  const [qrCodeBase64, setQrCodeBase64] = useState('');
   const [copiedId, setCopiedId] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [stats, setStats] = useState([]);
@@ -18,8 +19,19 @@ export default function PaymentQR({ navigate, showToast }) {
     const fetchQRDetails = async () => {
       try {
         const response = await gatewayClient.getDashboardData();
+        const profileResp = await gatewayClient.getProfile();
+        
+        if (profileResp.success && profileResp.data) {
+          setMerchantId(profileResp.data.displayId || profileResp.data.vpa || profileResp.data.storeId || '');
+          if (profileResp.data.qr_code_base64) {
+             setQrCodeBase64(profileResp.data.qr_code_base64);
+          } else {
+             // Fallback to local storage if API didn't return it but we saved it at registration
+             setQrCodeBase64(localStorage.getItem('merchant_qr') || '');
+          }
+        }
+
         if (response.success && response.data) {
-          setMerchantId(response.data.merchantId || 'MM-9823-XA');
           
           const txs = response.data.transactions || [];
           const mappedTxs = txs.map(tx => ({
@@ -117,11 +129,18 @@ export default function PaymentQR({ navigate, showToast }) {
                 
                 {/* QR Image Container */}
                 <div className="w-full max-w-[280px] aspect-square bg-surface-container rounded-2xl shadow-sm border border-outline-variant/20 p-4 mb-8 flex items-center justify-center relative">
-                  <img 
-                    alt="Merchant QR Code" 
-                    className="w-full h-full object-contain mix-blend-multiply" 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvl5_YVgFLWnrbPpOqi2wFK0PrV0vldKnaUb8Ggd1GAj50QQzTqlvXDTRnFo6WjHaVlRh63PdwNCqD6_lhgAAAc0XNXBFOkgUQVcNGXkJsAqD0BoJbkHafvIYblYjLy0Z86_a_yhEHJRT7hWBOtgSlhm_X5VjFw0b9QH_TuN_iwKDdZJPoLherznUnp7evyli8edXylOkpxMES5vpUzpgHHVk4sVri_etsi3nNZuWwz4cGUc4IuAgK"
-                  />
+                  {qrCodeBase64 ? (
+                    <img 
+                      alt="Merchant QR Code" 
+                      className="w-full h-full object-contain mix-blend-multiply" 
+                      src={qrCodeBase64.startsWith('http') ? qrCodeBase64 : `data:image/png;base64,${qrCodeBase64}`}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center text-on-surface-variant bg-surface-container-low rounded-xl">
+                      <span className="material-symbols-outlined text-4xl mb-2 opacity-50">qr_code_2</span>
+                      <p className="font-label-md text-sm opacity-80">QR Code not generated yet</p>
+                    </div>
+                  )}
                   {/* Central Logo Overlay */}
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-surface-container rounded-full p-1.5 shadow-md">
                     <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">M</div>
