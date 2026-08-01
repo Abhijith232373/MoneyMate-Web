@@ -43,7 +43,9 @@ const handleRequest = async (url, options = {}) => {
     try {
       const errorBody = await response.json();
       errorMessage = errorBody.error || errorBody.message || errorMessage;
-    } catch (e) {}
+    } catch (e) {
+      // ignore JSON parse error
+    }
     
     throw new Error(errorMessage);
   } catch (error) {
@@ -61,10 +63,10 @@ export const gatewayClient = {
 
   // Auth operations
   login: async (email, password) => {
-    // For this integration, we will use the status endpoint to verify if the merchant exists.
-    // In a real system, there would be a dedicated auth service verifying the password.
-    const ownerId = getOwnerId(email);
-    const response = await handleRequest(`/merchant/status/${ownerId}`, { method: 'GET' });
+    const response = await handleRequest('/merchant/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password })
+    });
     const storeData = response.data;
     
     // Store token and store_id
@@ -94,7 +96,9 @@ export const gatewayClient = {
       registered_address: formData.address,
       aadhaar_number: formData.aadharNumber,
       aadhaar_doc_url: formData.aadharFile || "https://example.com/aadhaar.pdf",
-      shop_license_url: formData.shopLicenseFile || "https://example.com/license.pdf"
+      shop_license_url: formData.shopLicenseFile || "https://example.com/license.pdf",
+      password: formData.password,
+      confirm_password: formData.confirmPassword
     };
 
     const response = await handleRequest('/merchant/register', {
@@ -195,6 +199,32 @@ export const gatewayClient = {
     const storeId = localStorage.getItem('merchant_store_id');
     const url = storeId ? `/merchant/${storeId}/campaigns` : `/merchant/campaigns`;
     return handleRequest(url, { method: 'GET' });
+  },
+
+  updateCampaign: async (campaignId, campaignData) => {
+    const storeId = localStorage.getItem('merchant_store_id');
+    const url = storeId ? `/merchant/${storeId}/campaigns/${campaignId}` : `/merchant/campaigns/${campaignId}`;
+    
+    const payload = {
+      name: campaignData.campaignName || campaignData.name,
+      offer_type: campaignData.offerType || campaignData.offer_type,
+      reward_value: parseFloat(campaignData.rewardValue || campaignData.reward_value) || 0,
+      min_bill_amount: parseFloat(campaignData.minPurchase || campaignData.min_bill_amount) || 0,
+      start_date: campaignData.startDate || campaignData.start_date || new Date().toISOString().split('T')[0],
+      end_date: campaignData.endDate || campaignData.end_date || new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0],
+      banner_url: campaignData.bannerFile || campaignData.bannerUrl || campaignData.banner_url || ""
+    };
+
+    return handleRequest(url, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  deleteCampaign: async (campaignId) => {
+    const storeId = localStorage.getItem('merchant_store_id');
+    const url = storeId ? `/merchant/${storeId}/campaigns/${campaignId}` : `/merchant/campaigns/${campaignId}`;
+    return handleRequest(url, { method: 'DELETE' });
   },
 
   redeemBalance: async (amount = 0) => {

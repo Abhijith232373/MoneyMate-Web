@@ -21,7 +21,7 @@ export default function ChoosePlan({ navigate, showToast }) {
     {
       title: "Essential",
       subtitle: "For new merchants starting their loyalty and scan payments journey.",
-      price: "$0",
+      price: "₹0",
       billingCycle: "/mo",
       buttonText: currentPlan === 'Essential' ? "Active Plan" : "Downgrade to Essential",
       buttonType: "secondary",
@@ -38,7 +38,7 @@ export default function ChoosePlan({ navigate, showToast }) {
     {
       title: "Growth",
       subtitle: "For growing businesses wanting to supercharge sales and customer retention.",
-      price: "$29",
+      price: "₹2,499",
       billingCycle: "/mo",
       buttonText: currentPlan === 'Growth' ? "Active Plan" : "Upgrade to Growth",
       buttonType: "primary",
@@ -56,7 +56,7 @@ export default function ChoosePlan({ navigate, showToast }) {
     {
       title: "Enterprise",
       subtitle: "For large retail chains needing bespoke integrations and dedicated support.",
-      price: "$99",
+      price: "₹8,499",
       billingCycle: "/mo",
       buttonText: "Contact Sales",
       buttonType: "secondary",
@@ -76,25 +76,21 @@ export default function ChoosePlan({ navigate, showToast }) {
       {/* Desktop Sidebar */}
       <MerchantSidebar currentPath={currentPath} navigate={navigate} />
 
-      {/* Main Container */}
-      <div className="flex-grow md:ml-[280px] flex flex-col">
+      <div className="flex-grow md:ml-[280px] flex flex-col min-w-0">
         {/* Top Navbar */}
         <MerchantNavbar currentPath={currentPath} navigate={navigate} />
 
         {/* Page Content */}
-        <main className="p-6 md:p-8 space-y-8 max-w-7xl w-full mx-auto pb-24 md:pb-8 flex-grow">
+        <main className="p-6 md:px-12 md:py-10 space-y-8 w-full pb-24 md:pb-8 flex-grow">
           {/* Header */}
-          <div className="text-center max-w-2xl mx-auto space-y-3 animate-fade-in">
+          <div className="text-center max-w-2xl mx-auto mb-8 animate-fade-in">
             <h2 className="font-headline-lg text-headline-lg font-bold text-on-background text-3xl">
               Choose Your Plan
             </h2>
-            <p className="font-body-md text-body-md text-on-surface-variant">
-              Select the plan that fits your business scale. Upgrade, downgrade, or cancel anytime.
-            </p>
           </div>
 
           {/* Plans Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 items-stretch animate-scale-up delay-100">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 pt-4 items-stretch animate-scale-up delay-100 max-w-6xl mx-auto">
             {plans.map((plan, idx) => (
               <PlanCard 
                 key={idx} 
@@ -102,13 +98,6 @@ export default function ChoosePlan({ navigate, showToast }) {
                 onAction={() => handleSelectPlan(plan.title)} 
               />
             ))}
-          </div>
-
-          {/* Pricing FAQ or Note */}
-          <div className="bg-surface-container-low rounded-2xl p-6 text-center border border-outline-variant/20 max-w-3xl mx-auto animate-fade-in delay-300">
-            <p className="font-body-sm text-body-sm text-on-surface-variant">
-              Need a custom plan with special transaction volumes? <button onClick={() => handleSelectPlan('Enterprise')} className="text-primary font-bold hover:underline">Contact our corporate solutions team</button> for custom pricing.
-            </p>
           </div>
         </main>
 

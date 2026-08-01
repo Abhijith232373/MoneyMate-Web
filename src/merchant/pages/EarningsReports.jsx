@@ -147,7 +147,7 @@ export default function EarningsReports({ navigate, showToast }) {
                 
                 <div className="flex items-baseline gap-3 pt-2">
                   <span className="font-display-lg text-display-lg text-primary font-bold text-4xl">${balance.toFixed(2)}</span>
-                  <span className="font-body-md text-body-md text-tertiary font-semibold bg-tertiary-fixed/30 px-2 py-1 rounded-lg flex items-center gap-1 text-sm">
+                  <span className="font-body-md text-body-md text-emerald-600 font-semibold bg-emerald-50 border border-emerald-200 px-2 py-1 rounded-lg flex items-center gap-1 text-sm">
                     <span className="material-symbols-outlined text-xs">trending_up</span>
                     <span>+12% this week</span>
                   </span>
@@ -242,7 +242,7 @@ export default function EarningsReports({ navigate, showToast }) {
                     <div className="text-right flex items-center gap-4">
                       <span className={`font-label-sm text-label-sm px-2.5 py-1 rounded-md hidden sm:inline-block ${
                         item.status === 'Settled' 
-                          ? 'bg-tertiary-fixed/30 text-tertiary-container' 
+                          ? 'bg-emerald-50 border border-emerald-200 text-emerald-600' 
                           : 'bg-surface-variant text-on-surface-variant'
                       }`}>
                         {item.status}
