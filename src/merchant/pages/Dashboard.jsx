@@ -9,6 +9,7 @@ export default function Dashboard({ navigate, showToast }) {
   const currentPath = '/merchant/dashboard';
   const [stats, setStats] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [campaigns, setCampaigns] = useState([]);
   const [businessName, setBusinessName] = useState('Your Business');
   const [loading, setLoading] = useState(true);
 
@@ -19,6 +20,7 @@ export default function Dashboard({ navigate, showToast }) {
         if (response.success && response.data) {
           setStats(response.data.stats || []);
           setTransactions(response.data.transactions || []);
+          setCampaigns(response.data.campaigns || []);
         }
         
         const profileResponse = await gatewayClient.getProfile();
@@ -142,14 +144,18 @@ export default function Dashboard({ navigate, showToast }) {
                   </p>
                 </div>
                 <div className="space-y-3 pt-4 border-t border-outline-variant/20">
-                  <div className="flex justify-between items-center py-2 bg-surface-container-low px-4 rounded-xl border border-outline-variant/20">
-                    <span className="font-body-sm text-body-sm text-on-background font-medium">Weekend Special</span>
-                    <span className="bg-emerald-50 text-emerald-600 font-bold text-xs px-2.5 py-0.5 rounded-full border border-emerald-200">Active</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 bg-surface-container-low px-4 rounded-xl border border-outline-variant/20">
-                    <span className="font-body-sm text-body-sm text-on-background font-medium">Loyalty Tier 1</span>
-                    <span className="bg-emerald-50 text-emerald-600 font-bold text-xs px-2.5 py-0.5 rounded-full border border-emerald-200">Active</span>
-                  </div>
+                  {campaigns.length === 0 ? (
+                    <div className="text-center py-4 text-on-surface-variant font-label-sm">No active campaigns</div>
+                  ) : (
+                    campaigns.map((camp, idx) => (
+                      <div key={camp.id || idx} className="flex justify-between items-center py-2 bg-surface-container-low px-4 rounded-xl border border-outline-variant/20">
+                        <span className="font-body-sm text-body-sm text-on-background font-medium">{camp.name}</span>
+                        <span className={`font-bold text-xs px-2.5 py-0.5 rounded-full border ${camp.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-surface-container-highest text-on-surface-variant border-outline-variant/30'}`}>
+                          {camp.status || 'Active'}
+                        </span>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
               <button 

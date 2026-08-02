@@ -95,8 +95,8 @@ export const gatewayClient = {
       tax_id: formData.taxId,
       registered_address: formData.address,
       aadhaar_number: formData.aadharNumber,
-      aadhaar_doc_url: formData.aadharFile || "https://example.com/aadhaar.pdf",
-      shop_license_url: formData.shopLicenseFile || "https://example.com/license.pdf",
+      aadhaar_doc_url: formData.aadharFileBase64 || "https://example.com/aadhaar.pdf",
+      shop_license_url: formData.shopLicenseFileBase64 || "https://example.com/license.pdf",
       password: formData.password,
       confirm_password: formData.confirmPassword
     };
@@ -138,15 +138,12 @@ export const gatewayClient = {
     const storeId = localStorage.getItem('merchant_store_id');
     const url = storeId ? `/merchant/${storeId}/profile` : `/merchant/profile`;
     
-    // We add a fallback in case backend fails or there's no storeId
     try {
       const response = await handleRequest(url, { method: 'GET' });
-      // ensure we match the frontend structure
-      if (response.data && !response.data.businessName && response.data.BusinessName) {
-         // Backend returns PascalCase or snake_case, adapt if necessary
-         // But the DTO shows json tags are camelCase except for ID
-      }
-      return { success: true, data: response.data };
+      // Backend returns { success: true, data: { ... } }
+      const actualData = response.data?.data || response.data;
+      
+      return { success: true, data: actualData };
     } catch(err) {
       console.warn("getProfile failed", err);
       throw err;
@@ -162,10 +159,11 @@ export const gatewayClient = {
       body: JSON.stringify(profileData),
     });
     
+    const actualData = response.data?.data || response.data;
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('profileUpdated', { detail: profileData }));
+      window.dispatchEvent(new CustomEvent('profileUpdated', { detail: actualData }));
     }
-    return { success: true, data: response.data };
+    return { success: true, data: actualData };
   },
 
   getDashboardData: async () => {
@@ -201,30 +199,14 @@ export const gatewayClient = {
     return handleRequest(url, { method: 'GET' });
   },
 
-  updateCampaign: async (campaignId, campaignData) => {
+  updateCampaignStatus: async (campaignId, isActive) => {
     const storeId = localStorage.getItem('merchant_store_id');
-    const url = storeId ? `/merchant/${storeId}/campaigns/${campaignId}` : `/merchant/campaigns/${campaignId}`;
-    
-    const payload = {
-      name: campaignData.campaignName || campaignData.name,
-      offer_type: campaignData.offerType || campaignData.offer_type,
-      reward_value: parseFloat(campaignData.rewardValue || campaignData.reward_value) || 0,
-      min_bill_amount: parseFloat(campaignData.minPurchase || campaignData.min_bill_amount) || 0,
-      start_date: campaignData.startDate || campaignData.start_date || new Date().toISOString().split('T')[0],
-      end_date: campaignData.endDate || campaignData.end_date || new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0],
-      banner_url: campaignData.bannerFile || campaignData.bannerUrl || campaignData.banner_url || ""
-    };
+    const url = storeId ? `/merchant/${storeId}/campaigns/${campaignId}/status` : `/merchant/campaigns/${campaignId}/status`;
 
     return handleRequest(url, {
       method: 'PUT',
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ is_active: isActive }),
     });
-  },
-
-  deleteCampaign: async (campaignId) => {
-    const storeId = localStorage.getItem('merchant_store_id');
-    const url = storeId ? `/merchant/${storeId}/campaigns/${campaignId}` : `/merchant/campaigns/${campaignId}`;
-    return handleRequest(url, { method: 'DELETE' });
   },
 
   redeemBalance: async (amount = 0) => {
@@ -275,6 +257,29 @@ export const gatewayClient = {
     return handleRequest(url, {
       method: 'POST',
       body: JSON.stringify({ plan_code: planCode, reason })
+    });
+  },
+
+  initiateUpgrade: async (planCode) => {
+    const storeId = localStorage.getItem('merchant_store_id');
+    const url = storeId ? `/merchant/${storeId}/subscriptions/upgrade/initiate` : `/merchant/subscriptions/upgrade/initiate`;
+    return handleRequest(url, {
+      method: 'POST',
+      body: JSON.stringify({ plan_code: planCode })
+    });
+  },
+
+  verifyUpgrade: async (paymentId, orderId, signature, planCode) => {
+    const storeId = localStorage.getItem('merchant_store_id');
+    const url = storeId ? `/merchant/${storeId}/subscriptions/upgrade/verify` : `/merchant/subscriptions/upgrade/verify`;
+    return handleRequest(url, {
+      method: 'POST',
+      body: JSON.stringify({ 
+        razorpay_payment_id: paymentId, 
+        razorpay_order_id: orderId, 
+        razorpay_signature: signature,
+        plan_code: planCode
+      })
     });
   },
 

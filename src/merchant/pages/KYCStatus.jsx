@@ -6,21 +6,38 @@ import { gatewayClient } from '../../api/gatewayClient';
 
 export default function KYCStatus({ navigate, showToast }) {
   const currentPath = '/merchant/kyc-status';
-  const [status, setStatus] = useState('Verified');
+  const [status, setStatus] = useState('Pending Review');
   const [loading, setLoading] = useState(true);
-  const [documents, setDocuments] = useState([
-    { id: 1, name: 'Shop License / Registration', status: 'Approved', type: 'description' },
-    { id: 2, name: 'Aadhaar Card Document', status: 'Pending', type: 'badge' },
-  ]);
+  const [documents, setDocuments] = useState([]);
 
-  const handleUpdateDocument = (e, docId) => {
+  const handleUpdateDocument = async (e, doc) => {
     const file = e.target.files[0];
     if (file) {
       if (showToast) showToast(`Uploading ${file.name}...`, 'info');
-      setTimeout(() => {
-        setDocuments(docs => docs.map(d => d.id === docId ? { ...d, status: 'Pending' } : d));
-        if (showToast) showToast('Document uploaded successfully!', 'success');
-      }, 1500);
+      
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        try {
+          const base64Data = reader.result;
+          const payload = {
+            aadhaarDocUrl: doc.docType === 'aadhaar' ? base64Data : undefined,
+            shopLicenseUrl: doc.docType === 'shop_license' ? base64Data : undefined
+          };
+          
+          const res = await gatewayClient.updateKYCDocuments(payload);
+          if (res.success) {
+            if (showToast) showToast('Document uploaded successfully!', 'success');
+            fetchStatus(); // Refresh data
+          }
+        } catch (err) {
+          console.error(err);
+          if (showToast) showToast('Failed to upload document', 'error');
+        }
+      };
+      reader.onerror = () => {
+        if (showToast) showToast('Failed to read file', 'error');
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -29,7 +46,8 @@ export default function KYCStatus({ navigate, showToast }) {
   };
 
   const handleViewDocument = (doc) => {
-    const pdfUrl = generateDummyPDF(doc.name);
+    const isMockUrl = !doc.url || doc.url.includes('example.com') || doc.url.includes('moneymate.com');
+    const pdfUrl = !isMockUrl && doc.url && (doc.url.startsWith('http') || doc.url.startsWith('data:')) ? doc.url : generateDummyPDF(doc.name);
     const newWindow = window.open();
     if (newWindow) {
       newWindow.document.write(`<iframe src="${pdfUrl}" width="100%" height="100%" style="border:none; margin:0; padding:0;"></iframe>`);
@@ -40,29 +58,50 @@ export default function KYCStatus({ navigate, showToast }) {
   };
 
   const handleDownloadDocument = (doc) => {
-    const pdfUrl = generateDummyPDF(doc.name);
+    const isMockUrl = !doc.url || doc.url.includes('example.com') || doc.url.includes('moneymate.com');
+    const pdfUrl = !isMockUrl && doc.url && (doc.url.startsWith('http') || doc.url.startsWith('data:')) ? doc.url : generateDummyPDF(doc.name);
     const link = document.createElement('a');
     link.href = pdfUrl;
-    link.download = `${doc.name.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+    
+    // Determine extension from data URI if present
+    let ext = 'pdf';
+    if (pdfUrl.startsWith('data:')) {
+      const mime = pdfUrl.substring(5, pdfUrl.indexOf(';'));
+      if (mime.includes('image/')) ext = mime.split('/')[1];
+      else if (mime.includes('pdf')) ext = 'pdf';
+    }
+    
+    link.download = `${doc.name.replace(/[^a-zA-Z0-9]/g, '_')}.${ext}`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     if (showToast) showToast(`${doc.name} downloaded successfully!`, 'success');
   };
 
-  useEffect(() => {
-    const fetchStatus = async () => {
-      try {
-        const response = await gatewayClient.getProfile();
-        if (response.success && response.data) {
-          setStatus(response.data.status || 'Verified');
+  const fetchStatus = async () => {
+    try {
+      const response = await gatewayClient.getKYCStatus();
+      if (response.success && response.data) {
+        setStatus(response.data.status || 'Pending Review');
+        if (response.data.documents) {
+          setDocuments(response.data.documents.map((doc, index) => ({
+            id: index + 1,
+            name: doc.title,
+            status: doc.status,
+            type: doc.doc_type === 'shop_license' ? 'description' : 'badge',
+            url: doc.url,
+            docType: doc.doc_type
+          })));
         }
-      } catch (error) {
-        console.error('Failed to load KYC status:', error);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      console.error('Failed to load KYC status:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchStatus();
   }, []);
 
@@ -152,7 +191,7 @@ export default function KYCStatus({ navigate, showToast }) {
                           id={`doc-upload-${doc.id}`}
                           className="hidden" 
                           accept="application/pdf,image/*"
-                          onChange={(e) => handleUpdateDocument(e, doc.id)}
+                          onChange={(e) => handleUpdateDocument(e, doc)}
                         />
                         <label 
                           htmlFor={`doc-upload-${doc.id}`}

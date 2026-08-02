@@ -62,13 +62,8 @@ export default function CreateOffer({ navigate, showToast }) {
     e.preventDefault();
     setLoading(true);
     try {
-      if (view === 'edit') {
-        await gatewayClient.updateCampaign(selectedCampaignId, formData);
-        if (showToast) showToast('Campaign updated successfully!', 'success');
-      } else {
-        await gatewayClient.createCampaign(formData);
-        if (showToast) showToast('Campaign launched successfully!', 'success');
-      }
+      await gatewayClient.createCampaign(formData);
+      if (showToast) showToast('Campaign launched successfully!', 'success');
       setView('list');
       fetchCampaigns();
     } catch (error) {
@@ -78,30 +73,16 @@ export default function CreateOffer({ navigate, showToast }) {
     }
   };
 
-  const handleEdit = (campaign) => {
-    // Map backend campaign object to formData
-    setFormData({
-      campaignName: campaign.name || campaign.title || '',
-      offerType: campaign.offer_type || campaign.type || 'Double Cashback (4%)',
-      minPurchase: campaign.min_bill_amount || campaign.minPurchase || '10',
-      startDate: campaign.start_date || campaign.startDate ? new Date(campaign.start_date || campaign.startDate).toISOString().split('T')[0] : '',
-      endDate: campaign.end_date || campaign.endDate ? new Date(campaign.end_date || campaign.endDate).toISOString().split('T')[0] : '',
-      targetAudience: 'All Customers',
-      bannerFile: campaign.banner_url || campaign.bannerUrl || null,
-    });
-    setSelectedCampaignId(campaign.id || campaign.ID);
-    setView('edit');
-  };
-
-  const handleDelete = async (campaignId) => {
-    if (!window.confirm("Are you sure you want to delete this campaign?")) return;
+  const handleToggleStatus = async (campaign) => {
+    const campaignId = campaign.id || campaign.ID;
+    const newStatus = !campaign.is_active;
     
     try {
-      await gatewayClient.deleteCampaign(campaignId);
-      if (showToast) showToast('Campaign deleted successfully!', 'success');
+      await gatewayClient.updateCampaignStatus(campaignId, newStatus);
+      if (showToast) showToast(`Campaign ${newStatus ? 'resumed' : 'paused'} successfully!`, 'success');
       fetchCampaigns();
     } catch (error) {
-      if (showToast) showToast('Failed to delete campaign', 'error');
+      if (showToast) showToast('Failed to update campaign status', 'error');
     }
   };
 
@@ -216,12 +197,12 @@ export default function CreateOffer({ navigate, showToast }) {
             {loading ? (
               <>
                 <span className="material-symbols-outlined animate-spin text-sm">sync</span>
-                <span>{view === 'edit' ? 'Saving...' : 'Launching...'}</span>
+                <span>Launching...</span>
               </>
             ) : (
               <>
-                <span className="material-symbols-outlined text-sm">{view === 'edit' ? 'save' : 'rocket_launch'}</span>
-                <span>{view === 'edit' ? 'Save Changes' : 'Launch Campaign'}</span>
+                <span className="material-symbols-outlined text-sm">rocket_launch</span>
+                <span>Launch Campaign</span>
               </>
             )}
           </button>
@@ -302,27 +283,19 @@ export default function CreateOffer({ navigate, showToast }) {
                     </td>
                     <td className="px-6 py-5">
                       <span className={`text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide inline-block ${
-                        camp.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 
-                        camp.status === 'Flagged' ? 'bg-error/10 text-error' : 'bg-surface-container-highest text-on-surface-variant'
+                        camp.is_active ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 'bg-surface-container-highest text-on-surface-variant'
                       }`}>
-                        {camp.status || 'Active'}
+                        {camp.is_active ? 'Active' : 'Paused'}
                       </span>
                     </td>
                     <td className="px-6 py-5 text-right">
                       <div className="flex justify-end gap-3 opacity-60 group-hover:opacity-100 transition-opacity">
                         <button 
-                          onClick={() => handleEdit(camp)}
-                          className="p-2.5 bg-secondary/10 text-secondary hover:bg-secondary hover:text-on-secondary rounded-xl transition-colors flex items-center justify-center"
-                          title="Edit Campaign"
+                          onClick={() => handleToggleStatus(camp)}
+                          className={`p-2.5 rounded-xl transition-colors flex items-center justify-center ${camp.is_active ? 'bg-error/10 text-error hover:bg-error hover:text-on-error' : 'bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white'}`}
+                          title={camp.is_active ? "Pause Campaign" : "Resume Campaign"}
                         >
-                          <span className="material-symbols-outlined text-sm">edit</span>
-                        </button>
-                        <button 
-                          onClick={() => handleDelete(camp.id || camp.ID)}
-                          className="p-2.5 bg-error/10 text-error hover:bg-error hover:text-on-error rounded-xl transition-colors flex items-center justify-center"
-                          title="Delete Campaign"
-                        >
-                          <span className="material-symbols-outlined text-sm">delete</span>
+                          <span className="material-symbols-outlined text-sm">{camp.is_active ? 'pause' : 'play_arrow'}</span>
                         </button>
                       </div>
                     </td>
@@ -353,10 +326,10 @@ export default function CreateOffer({ navigate, showToast }) {
                   Back to Offers
                 </button>
                 <h2 className="font-headline-lg text-headline-lg font-bold text-on-background text-3xl">
-                  {view === 'edit' ? 'Edit Offer' : 'Create New Offer'}
+                  Create New Offer
                 </h2>
                 <p className="font-body-md text-body-md text-on-surface-variant mt-1">
-                  {view === 'edit' ? 'Update the details of your promotional campaign.' : 'Launch a new loyalty campaign to incentivize scan payments at checkout.'}
+                  Launch a new loyalty campaign to incentivize scan payments at checkout.
                 </p>
               </div>
               {renderForm()}
