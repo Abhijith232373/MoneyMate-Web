@@ -353,7 +353,7 @@ export default function MerchantManagement() {
       render: (row) => (
         <div>
           <span className="font-mono text-xs font-bold bg-admin-surface-container-high px-2 py-0.5 rounded text-admin-on-surface">
-            {row.id}
+            {row.displayId || row.id}
           </span>
           <p className="text-[11px] text-admin-on-surface-variant mt-1">{row.registeredDate}</p>
         </div>
