@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import StatusBadge from "../components/StatusBadge";
 import KpiCard from "../components/KpiCard";
-import { adminMerchantService } from "../../services/api/admin/merchants";
+import { adminMerchantService } from "../services/merchants";
 import { 
   UserCheck, 
   ShieldAlert, 

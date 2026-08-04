@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import DataTable from "../components/DataTable";
 import StatusBadge from "../components/StatusBadge";
 import KpiCard from "../components/KpiCard";
-import { adminMerchantService } from "../../services/api/admin/merchants";
+import { adminMerchantService } from "../services/merchants";
 import { 
   Megaphone, 
   Tag, 

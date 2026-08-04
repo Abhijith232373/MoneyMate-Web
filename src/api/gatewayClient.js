@@ -43,13 +43,30 @@ const handleRequest = async (url, options = {}) => {
     try {
       const errorBody = await response.json();
       errorMessage = errorBody.error || errorBody.message || errorMessage;
+      
+      // Sanitize raw Go backend errors for the frontend UI
+      if (typeof errorMessage === 'string') {
+        if (errorMessage.includes('sql: no rows')) {
+          errorMessage = 'Requested data not found or invalid credentials.';
+        } else if (errorMessage.includes('duplicate key') || errorMessage.includes('unique constraint')) {
+          errorMessage = 'This record (e.g., email or phone) already exists.';
+        } else if (errorMessage.includes('connection refused')) {
+          errorMessage = 'Unable to connect to the server. Please try again later.';
+        } else if (errorMessage.includes('invalid UUID') || errorMessage.includes('uuid: incorrect format')) {
+          errorMessage = 'Invalid data ID format.';
+        } else if (errorMessage.includes('token') && (errorMessage.includes('invalid') || errorMessage.includes('expired'))) {
+          errorMessage = 'Your session has expired or is invalid. Please log in again.';
+        } else if (errorMessage.includes('bcrypt:')) {
+          errorMessage = 'Invalid password verification.';
+        }
+      }
     } catch (e) {
       // ignore JSON parse error
     }
     
     throw new Error(errorMessage);
   } catch (error) {
-    console.error(`[GatewayClient] API connection failed for ${url}. Error: ${error.message}`);
+    // Suppress console errors per user request to keep console clean
     throw error;
   }
 };

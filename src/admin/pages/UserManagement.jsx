@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DataTable from "../components/DataTable";
 import StatusBadge from "../components/StatusBadge";
-import { adminUserService } from "../../services/api/admin/users";
+import { adminUserService } from "../services/users";
 import { Search, Plus, Filter, MoreVertical, ShieldAlert, CheckCircle2, Ban } from "lucide-react";
 
 export default function UserManagement() {

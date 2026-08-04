@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import KpiCard from "../components/KpiCard";
-import { adminMerchantService } from "../../services/api/admin/merchants";
+import { adminMerchantService } from "../services/merchants";
 import { 
   Crown, 
   DollarSign, 
