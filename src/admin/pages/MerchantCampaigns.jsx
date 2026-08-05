@@ -183,9 +183,7 @@ export default function MerchantCampaigns() {
               {campaigns.length} Total Offers
             </span>
           </div>
-          <p className="text-sm text-admin-on-surface-variant mt-1">
-            Audit promotional cashback campaigns, monitor reward budgets, and flag policy violations across store owners.
-          </p>
+
         </div>
 
         <div className="flex items-center gap-2 text-xs font-semibold">

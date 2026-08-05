@@ -2,6 +2,7 @@
 // Handles backend connectivity to the Go merchant service on Render
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'https://merchant-service-ylvn.onrender.com';
+const ADMIN_BASE_URL = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:8080/api/v1';
 
 // Helper to simulate an Auth Service UUID generation
 const getOwnerId = (email) => {
@@ -26,7 +27,9 @@ const handleRequest = async (url, options = {}) => {
     ...options.headers,
   };
 
-  const fullUrl = `${BASE_URL}${url}`;
+  const isRouteAdmin = url.startsWith('/admin') || url.startsWith('/auth');
+  const activeBaseUrl = isRouteAdmin ? ADMIN_BASE_URL : BASE_URL;
+  const fullUrl = `${activeBaseUrl}${url}`;
   
   try {
     const response = await fetch(fullUrl, {
@@ -58,6 +61,9 @@ const handleRequest = async (url, options = {}) => {
           errorMessage = 'Your session has expired or is invalid. Please log in again.';
         } else if (errorMessage.includes('bcrypt:')) {
           errorMessage = 'Invalid password verification.';
+        } else {
+          // Catch-all: Never expose raw unhandled Go errors (like "pq: ...") directly to the UI
+          errorMessage = 'An unexpected server error occurred. Please try again or contact support.';
         }
       }
     } catch (e) {
@@ -76,6 +82,7 @@ export const gatewayClient = {
   get: (url, options = {}) => handleRequest(url, { ...options, method: 'GET' }),
   post: (url, data, options = {}) => handleRequest(url, { ...options, method: 'POST', body: JSON.stringify(data) }),
   put: (url, data, options = {}) => handleRequest(url, { ...options, method: 'PUT', body: JSON.stringify(data) }),
+  patch: (url, data, options = {}) => handleRequest(url, { ...options, method: 'PATCH', body: JSON.stringify(data) }),
   delete: (url, options = {}) => handleRequest(url, { ...options, method: 'DELETE' }),
 
   // Auth operations

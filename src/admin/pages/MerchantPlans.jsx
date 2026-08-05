@@ -71,9 +71,7 @@ export default function MerchantPlans() {
               3 Active Tiers
             </span>
           </div>
-          <p className="text-sm text-admin-on-surface-variant mt-1">
-            Configure SaaS billing tiers, manage Monthly Recurring Revenue (MRR), and define feature limits for shop owners.
-          </p>
+
         </div>
 
         <button 
