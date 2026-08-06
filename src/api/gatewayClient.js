@@ -1,8 +1,8 @@
 // MoneyMate Gateway Client
 // Handles backend connectivity to the Go merchant service on Render
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://merchant-service-ylvn.onrender.com';
-const ADMIN_BASE_URL = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:8080/api/v1';
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://money-mate.duckdns.org/api/v1';
+const ADMIN_BASE_URL = import.meta.env.VITE_ADMIN_API_URL || 'https://money-mate.duckdns.org/api/v1';
 
 // Helper to simulate an Auth Service UUID generation
 const getOwnerId = (email) => {
@@ -61,6 +61,8 @@ const handleRequest = async (url, options = {}) => {
           errorMessage = 'Your session has expired or is invalid. Please log in again.';
         } else if (errorMessage.includes('bcrypt:')) {
           errorMessage = 'Invalid password verification.';
+        } else if (errorMessage.toLowerCase().includes('invalid credentials') || errorMessage.toLowerCase().includes('unauthorized')) {
+          errorMessage = 'Invalid email or password. Please try again.';
         } else {
           // Catch-all: Never expose raw unhandled Go errors (like "pq: ...") directly to the UI
           errorMessage = 'An unexpected server error occurred. Please try again or contact support.';

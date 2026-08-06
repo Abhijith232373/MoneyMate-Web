@@ -17,6 +17,7 @@ export default function Profile({ navigate, showToast }) {
     email: '',
     mobile: '',
     profileImage: '',
+    createdAt: '',
   });
   const [loading, setLoading] = useState(true);
 
@@ -35,6 +36,7 @@ export default function Profile({ navigate, showToast }) {
             email: response.data.email || '',
             mobile: response.data.mobile || '',
             profileImage: response.data.profileImage || '',
+            createdAt: response.data.createdAt || '',
           });
         }
       } catch (error) {
@@ -178,6 +180,17 @@ export default function Profile({ navigate, showToast }) {
                           placeholder="•••-••-••••"
                         />
                       </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="font-label-sm text-label-sm text-on-surface-variant ml-1 font-semibold">Registered At</label>
+                      <input 
+                        type="text" 
+                        value={formData.createdAt ? new Date(formData.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}
+                        disabled
+                        className="w-full bg-surface-variant/30 border border-outline-variant/30 rounded-xl px-4 py-3 font-body-md text-on-surface-variant outline-none cursor-not-allowed placeholder:text-on-surface-variant/40"
+                        placeholder="N/A"
+                      />
                     </div>
                   </div>
 
