@@ -31,10 +31,14 @@ export default function CreateOffer({ navigate, showToast }) {
   const fetchCampaigns = async () => {
     setFetching(true);
     try {
-      const response = await gatewayClient.getCampaigns();
-      setCampaigns(response.data || []);
+      const response = await gatewayClient.getCampaigns().catch(e => ({ success: false }));
+      if (response && response.success && response.data) {
+        setCampaigns(response.data || []);
+      } else {
+        setCampaigns([]);
+      }
     } catch (err) {
-      if (showToast) showToast('Failed to load campaigns', 'error');
+      console.warn('Backend rejected campaign fetch:', err);
     } finally {
       setFetching(false);
     }
