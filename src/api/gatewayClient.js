@@ -249,11 +249,15 @@ export const gatewayClient = {
     // Map frontend structure to DTO CreateCampaignRequest
     const payload = {
       name: campaignData.campaignName,
+      redeem_code: campaignData.redeemCode,
+      offer_category: campaignData.offerCategory,
       offer_type: campaignData.offerType,
       reward_value: parseFloat(campaignData.rewardValue) || 0,
       min_bill_amount: parseFloat(campaignData.minPurchase) || 0,
-      start_date: campaignData.startDate || new Date().toISOString().split('T')[0],
-      end_date: campaignData.endDate || new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0],
+      redemption_limit: parseInt(campaignData.redemptionLimit) || 0,
+      target_audience: campaignData.targetAudience || 'All Customers',
+      start_date: campaignData.startDate,
+      end_date: campaignData.endDate,
       banner_url: campaignData.bannerFile || campaignData.bannerUrl || ""
     };
 
