@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { gatewayClient } from '../../api/gatewayClient';
 
@@ -8,6 +8,12 @@ const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem('admin_token')) {
+      navigate('/admin', { replace: true });
+    }
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,7 +27,9 @@ const AdminLogin = () => {
         });
         
         if (response.success && response.data) {
-          localStorage.setItem('admin_token', response.data.access_token || response.data.AccessToken);
+          const responseData = response.data.data || response.data || {};
+          const token = responseData.access_token || responseData.AccessToken || responseData.token || responseData.Token;
+          localStorage.setItem('admin_token', token);
           navigate('/admin');
         } else {
           setError(response.data?.error || 'Login failed');

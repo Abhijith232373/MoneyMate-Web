@@ -1,7 +1,7 @@
 // MoneyMate Gateway Client
 // Handles backend connectivity to the Go merchant service on Render
 
-const rawBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const rawBaseUrl = import.meta.env.VITE_API_URL || '';
 const BASE_URL = rawBaseUrl.endsWith('/api/v1') ? rawBaseUrl : `${rawBaseUrl}/api/v1`;
 const ADMIN_BASE_URL = import.meta.env.VITE_ADMIN_API_URL || BASE_URL;
 
