@@ -21,14 +21,15 @@ const getOwnerId = (email) => {
 };
 
 const handleRequest = async (url, options = {}) => {
-  const token = localStorage.getItem('merchant_token');
+  const isRouteAdmin = url.startsWith('/admin') || url.startsWith('/auth');
+  const token = isRouteAdmin ? localStorage.getItem('admin_token') : localStorage.getItem('merchant_token');
+  
   const headers = {
     'Content-Type': 'application/json',
     ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
     ...options.headers,
   };
 
-  const isRouteAdmin = url.startsWith('/admin') || url.startsWith('/auth');
   const activeBaseUrl = isRouteAdmin ? ADMIN_BASE_URL : BASE_URL;
   const fullUrl = `${activeBaseUrl}${url}`;
   
