@@ -54,7 +54,7 @@ export default function MerchantManagement() {
     email: "",
     phone: "",
     category: "Retail",
-    tier: "Basic",
+    tier: "Essential",
     status: "Active",
     address: "",
     password: ""
@@ -91,7 +91,7 @@ export default function MerchantManagement() {
       email: "",
       phone: "",
       category: "Retail",
-      tier: "Basic",
+      tier: "Essential",
       status: "Active",
       address: "",
       password: ""
@@ -131,7 +131,7 @@ export default function MerchantManagement() {
       setIsCreateModalOpen(false);
       fetchMerchants();
     } catch (error) {
-      showToast("Failed to create merchant", "error");
+      showToast(error.message || "Failed to create merchant", "error");
     }
   };
 
@@ -393,10 +393,10 @@ export default function MerchantManagement() {
       render: (row) => (
         <span className={`px-2.5 py-1 rounded-full text-xs font-bold border ${
           row.tier === "Enterprise" ? "bg-indigo-50 text-indigo-800 border-indigo-200" :
-          row.tier === "Premium" ? "bg-amber-50 text-amber-800 border-amber-300 ring-1 ring-amber-400/50" :
+          row.tier === "Growth" ? "bg-amber-50 text-amber-800 border-amber-300 ring-1 ring-amber-400/50" :
           "bg-admin-surface-container-high text-admin-on-surface border-admin-outline-variant"
         }`}>
-          {row.tier === "Enterprise" ? "👑 Enterprise" : row.tier === "Premium" ? "⭐ Premium" : "Basic"}
+          {row.tier === "Enterprise" ? "👑 Enterprise" : row.tier === "Growth" ? "⭐ Growth" : "Essential"}
         </span>
       )
     },
@@ -596,7 +596,7 @@ export default function MerchantManagement() {
         <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-admin-outline-variant/40 text-xs font-semibold">
           <div className="flex items-center gap-2">
             <span className="text-admin-on-surface-variant">Tier:</span>
-            {["All", "Basic", "Premium", "Enterprise"].map(tier => (
+            {["All", "Essential", "Growth", "Enterprise"].map(tier => (
               <button
                 key={tier}
                 onClick={() => setTierFilter(tier)}
@@ -737,8 +737,8 @@ export default function MerchantManagement() {
                     onChange={(e) => setFormData({ ...formData, tier: e.target.value })}
                     className="w-full px-3 py-2 rounded-xl border border-admin-outline-variant text-xs font-bold text-admin-on-surface bg-admin-surface-container-lowest focus:ring-2 focus:ring-admin-primary/20 outline-none"
                   >
-                    <option value="Basic">Basic ($0)</option>
-                    <option value="Premium">Premium ($29)</option>
+                    <option value="Essential">Essential ($0)</option>
+                    <option value="Growth">Growth ($29)</option>
                     <option value="Enterprise">Enterprise ($99)</option>
                   </select>
                 </div>
