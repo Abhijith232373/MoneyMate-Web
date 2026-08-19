@@ -48,6 +48,7 @@ export default function MerchantManagement() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingMerchant, setEditingMerchant] = useState(null);
   const [deletingMerchant, setDeletingMerchant] = useState(null);
+  const [blockingMerchant, setBlockingMerchant] = useState(null);
   const [formData, setFormData] = useState({
     businessName: "",
     ownerName: "",
@@ -318,6 +319,22 @@ export default function MerchantManagement() {
     }
   };
 
+  const handleConfirmBlock = async () => {
+    if (!blockingMerchant) return;
+    try {
+      await adminMerchantService.updateMerchantStatus(blockingMerchant.id, "Blocked");
+      showToast(`Merchant "${blockingMerchant.businessName}" suspended successfully!`, "error");
+      if (selectedMerchant && selectedMerchant.id === blockingMerchant.id) {
+        setSelectedMerchant(prev => ({ ...prev, status: "Blocked" }));
+      }
+      setBlockingMerchant(null);
+      fetchMerchants();
+    } catch (error) {
+      showToast("Failed to suspend merchant", "error");
+    }
+  };
+
+
   const handleChangeTier = async (id, newTier, e) => {
     if (e) e.stopPropagation();
     try {
@@ -426,7 +443,7 @@ export default function MerchantManagement() {
     {
       header: "Actions",
       render: (row) => (
-        <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
           <button 
             onClick={() => setSelectedMerchant(row)}
             className="p-1.5 bg-admin-surface-container-low text-admin-on-surface-variant hover:text-admin-primary hover:bg-admin-primary/10 rounded-lg transition-colors" 
@@ -434,39 +451,47 @@ export default function MerchantManagement() {
           >
             <Search className="w-4 h-4" />
           </button>
-          <button 
-            onClick={(e) => handleOpenEdit(row, e)}
-            className="p-1.5 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white rounded-lg transition-all" 
-            title="Edit Merchant Details"
-          >
-            <Edit3 className="w-4 h-4" />
-          </button>
+
           {row.kycStatus === "Pending" && (
             <button 
               onClick={(e) => handleApproveKYC(row.id, e)}
-              className="p-1.5 bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white rounded-lg transition-all" 
-              title="Approve KYC & Activate"
+              className="flex items-center gap-1.5 text-xs font-semibold text-admin-on-surface-variant hover:text-admin-primary transition-colors"
             >
-              <UserCheck className="w-4 h-4" />
+              <UserCheck className="w-3.5 h-3.5" /> <span>Approve KYC</span>
             </button>
           )}
+
+          {row.status === "Active" ? (
+            <button 
+              onClick={(e) => {
+                if (e) e.stopPropagation();
+                setBlockingMerchant(row);
+              }}
+              className="flex items-center gap-1.5 text-xs font-semibold text-admin-on-surface-variant hover:text-admin-on-surface transition-colors"
+            >
+              <Ban className="w-3.5 h-3.5" /> <span>Suspend</span>
+            </button>
+          ) : (
+            <button 
+              onClick={(e) => handleToggleStatus(row.id, row.status, e)}
+              className="flex items-center gap-1.5 text-xs font-semibold text-admin-on-surface-variant hover:text-admin-on-surface transition-colors"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5" /> <span>Activate</span>
+            </button>
+          )}
+
           <button 
-            onClick={(e) => handleToggleStatus(row.id, row.status, e)}
-            className={`flex items-center gap-1 p-1.5 rounded-lg transition-all ${
-              row.status === "Active" 
-                ? "bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white" 
-                : "bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white"
-            }`}
-            title={row.status === "Active" ? "Block Merchant" : "Unblock Merchant"}
+            onClick={(e) => handleOpenEdit(row, e)}
+            className="flex items-center gap-1.5 text-xs font-semibold text-admin-on-surface-variant hover:text-admin-on-surface transition-colors"
           >
-            {row.status === "Active" ? <><Ban className="w-4 h-4" /> <span className="text-[10px] font-bold">Block</span></> : <><CheckCircle2 className="w-4 h-4" /> <span className="text-[10px] font-bold">Unblock</span></>}
+            <Edit3 className="w-3.5 h-3.5" /> <span>Edit</span>
           </button>
+
           <button 
             onClick={(e) => handleOpenDelete(row, e)}
-            className="p-1.5 bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white rounded-lg transition-all" 
-            title="Delete Merchant Store"
+            className="flex items-center gap-1.5 text-xs font-semibold text-admin-on-surface-variant hover:text-admin-on-surface transition-colors"
           >
-            <Trash2 className="w-4 h-4" />
+            <Trash2 className="w-3.5 h-3.5" /> <span>Delete</span>
           </button>
         </div>
       )
@@ -940,8 +965,8 @@ export default function MerchantManagement() {
       {/* DELETE CONFIRMATION MODAL */}
       {deletingMerchant && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-admin-surface-container rounded-3xl w-full max-w-md shadow-2xl overflow-hidden border border-red-200 animate-in zoom-in-95 duration-200 p-6 space-y-5">
-            <div className="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center mx-auto">
+          <div className="bg-admin-surface-container rounded-3xl w-full max-w-md shadow-2xl overflow-hidden border border-red-500/20 animate-in zoom-in-95 duration-200 p-6 space-y-5">
+            <div className="w-12 h-12 rounded-2xl bg-red-500/10 text-red-500 flex items-center justify-center mx-auto">
               <AlertTriangle className="w-6 h-6" />
             </div>
 
@@ -963,9 +988,44 @@ export default function MerchantManagement() {
               <button 
                 type="button"
                 onClick={handleConfirmDelete}
-                className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-xl shadow-md shadow-red-500/20 transition-all flex items-center justify-center gap-1.5"
+                className="flex-1 py-2.5 bg-red-500/10 hover:bg-red-500 hover:text-white text-red-500 border border-red-500/20 hover:border-red-500 font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
               >
                 <Trash2 className="w-4 h-4" /> Yes, Delete Store
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* BLOCK CONFIRMATION MODAL */}
+      {blockingMerchant && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-admin-surface-container rounded-3xl w-full max-w-md shadow-2xl overflow-hidden border border-red-500/20 animate-in zoom-in-95 duration-200 p-6 space-y-5">
+            <div className="w-12 h-12 rounded-2xl bg-red-500/10 text-red-500 flex items-center justify-center mx-auto">
+              <Ban className="w-6 h-6" />
+            </div>
+
+            <div className="text-center space-y-2">
+              <h3 className="font-extrabold text-lg text-admin-on-surface">Suspend Store Account?</h3>
+              <p className="text-xs text-admin-on-surface-variant leading-relaxed">
+                You are about to suspend <span className="font-bold text-admin-on-surface">&quot;{blockingMerchant.businessName}&quot;</span>. This store will no longer be able to access the merchant portal, issue cashback, or process new transactions until they are unblocked.
+              </p>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-admin-outline-variant">
+              <button 
+                type="button"
+                onClick={() => setBlockingMerchant(null)}
+                className="flex-1 py-2.5 border border-admin-outline-variant text-admin-on-surface font-semibold text-xs rounded-xl hover:bg-admin-surface-container-highest transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                type="button"
+                onClick={handleConfirmBlock}
+                className="flex-1 py-2.5 bg-red-500/10 hover:bg-red-500 hover:text-white text-red-500 border border-red-500/20 hover:border-red-500 font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
+              >
+                <Ban className="w-4 h-4" /> Yes, Suspend Store
               </button>
             </div>
           </div>
@@ -1033,15 +1093,15 @@ export default function MerchantManagement() {
                   )}
                   {selectedMerchant.status === "Active" ? (
                     <button 
-                      onClick={() => handleToggleStatus(selectedMerchant.id, "Active")}
-                      className="px-3.5 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5"
+                      onClick={() => setBlockingMerchant(selectedMerchant)}
+                      className="px-3.5 py-2 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white border border-red-500/20 hover:border-red-500 font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5"
                     >
                       <Ban className="w-4 h-4" /> Suspend Store
                     </button>
                   ) : (
                     <button 
                       onClick={() => handleToggleStatus(selectedMerchant.id, "Suspended")}
-                      className="px-3.5 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5"
+                      className="px-3.5 py-2 bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white border border-green-500/20 hover:border-green-500 font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5"
                     >
                       <CheckCircle2 className="w-4 h-4" /> Activate Store
                     </button>
@@ -1155,13 +1215,13 @@ export default function MerchantManagement() {
                   <div className="pt-3 border-t flex justify-end gap-3">
                     <button 
                       onClick={() => handleRejectKYC(selectedMerchant.id)}
-                      className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-semibold text-xs rounded-xl border border-red-200 transition-all"
+                      className="px-4 py-2 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white border border-red-500/20 hover:border-red-500 font-semibold text-xs rounded-xl transition-all"
                     >
                       Reject Documents
                     </button>
                     <button 
                       onClick={() => handleApproveKYC(selectedMerchant.id)}
-                      className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-xl shadow-md transition-all flex items-center gap-1.5"
+                      className="px-4 py-2 bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white border border-green-500/20 hover:border-green-500 font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5"
                     >
                       <UserCheck className="w-4 h-4" /> Approve & Verify Store
                     </button>
@@ -1195,7 +1255,7 @@ export default function MerchantManagement() {
             <div className="p-4 border-t border-admin-outline-variant bg-admin-surface-container-high flex justify-between items-center">
               <button 
                 onClick={(e) => handleOpenDelete(selectedMerchant, e)}
-                className="px-4 py-2 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1.5"
+                className="px-4 py-2 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white border border-red-500/20 hover:border-red-500 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5"
               >
                 <Trash2 className="w-4 h-4" /> Delete Store
               </button>

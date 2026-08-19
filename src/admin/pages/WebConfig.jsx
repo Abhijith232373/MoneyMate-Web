@@ -160,8 +160,29 @@ export default function WebConfig() {
     setConfigState(prev => {
       const newState = { ...prev, [id]: !prev[id] };
       
-      // If toggling a parent OFF, optionally we could toggle children OFF.
-      // But for UI clarity, we just disable the children visually if parent is OFF.
+      if (parentId) {
+        // Toggling a sub-route
+        const parentMod = apiModules.find(m => m.id === parentId);
+        if (parentMod) {
+          const anySubActive = parentMod.subRoutes.some(sub => newState[sub.id]);
+          if (!anySubActive) {
+            newState[parentId] = false; // Turn off parent if all subs are off
+          } else {
+            newState[parentId] = true; // Ensure parent is on if at least one sub is on
+          }
+        }
+      } else {
+        // Toggling a master route
+        const mod = apiModules.find(m => m.id === id);
+        if (mod) {
+          const isMasterNowActive = newState[id];
+          // Match all sub-routes to the master state
+          mod.subRoutes.forEach(sub => {
+            newState[sub.id] = isMasterNowActive;
+          });
+        }
+      }
+      
       return newState;
     });
   };
@@ -210,47 +231,12 @@ export default function WebConfig() {
             </div>
             Gateway Router Configuration
           </h2>
-          <p className="text-sm text-admin-on-surface-variant mt-2 max-w-3xl leading-relaxed">
-            Manage global API routes and granular proxy configurations. Disabling a master route instantly triggers a "503 Maintenance Mode" across all its corresponding endpoints. Sub-route toggles allow fine-grained access control.
-          </p>
         </div>
         
-        {hasPermission('settings', 'update') && (
-          <div className="flex items-center gap-3 shrink-0">
-            <button 
-              onClick={() => handleToggleAll(true)}
-              className="px-4 py-2.5 bg-admin-surface-container-highest border border-admin-outline-variant text-admin-on-surface rounded-xl font-semibold shadow-sm hover:bg-admin-surface-container-highest/80 transition-colors flex items-center gap-2"
-            >
-              <RefreshCw className="w-4 h-4" /> Enable All
-            </button>
-            <button 
-              onClick={handleSave}
-              disabled={loading}
-              className="px-5 py-2.5 bg-admin-primary text-admin-on-primary rounded-xl font-bold shadow-[0_4px_14px_0_rgba(59,130,246,0.39)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.23)] hover:bg-admin-primary-container transition-all flex items-center gap-2 disabled:opacity-70"
-            >
-              {loading ? (
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-              ) : (
-                <Save className="w-4 h-4" />
-              )}
-              Apply Configuration
-            </button>
-          </div>
-        )}
+
       </div>
 
-      {/* Warning Card */}
-      <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-5 flex gap-4">
-        <div className="p-2 bg-amber-500/20 text-amber-500 rounded-lg h-fit shrink-0">
-          <Power className="w-5 h-5" />
-        </div>
-        <div>
-          <h4 className="text-[15px] font-bold text-amber-500 mb-1">Global System Warning</h4>
-          <p className="text-sm text-amber-500/90 leading-relaxed">
-            Disabling core modules like the <strong>Authentication API</strong> or <strong>Secure Internal APIs</strong> will block all dependent services. Sub-route toggles are evaluated by the gateway prior to forwarding to downstream microservices. Changes apply instantly.
-          </p>
-        </div>
-      </div>
+
 
       {/* Grid of Route Modules */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

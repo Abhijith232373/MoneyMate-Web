@@ -88,7 +88,8 @@ export const adminMerchantService = {
 
   updateMerchantStatus: async (id, status) => {
     let apiStatus = status.toLowerCase();
-    if (apiStatus === "active") apiStatus = "verified";
+    if (apiStatus === "active") apiStatus = "active";
+    if (apiStatus === "blocked") apiStatus = "suspended";
     return gatewayClient.put(`/admin/merchants/${id}/status`, { status: apiStatus });
   },
 

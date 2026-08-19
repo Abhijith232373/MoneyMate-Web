@@ -116,7 +116,15 @@ export default function UserManagement() {
   );
 
   const columns = [
-    { header: "User ID", accessor: "id" },
+    { 
+      header: "VPA Address", 
+      accessor: "handle",
+      render: (row) => (
+        <span className="font-mono text-sm text-admin-on-surface-variant">
+          {row.handle || 'No VPA assigned'}
+        </span>
+      )
+    },
     { 
       header: "User", 
       render: (row) => (
